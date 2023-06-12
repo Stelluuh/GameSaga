@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: GameSaga_production
-  username: GameSaga
-  password: <%= ENV["GAMESAGA_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
