@@ -5,7 +5,7 @@ class GameLog < ApplicationRecord
   STATUS_OPTIONS = {
     0 => "Not Started",
     1 => "In Progress",
-    2 => "Did not Finish",
+    2 => "Did Not Finish",
     3 => "Complete",
     4 => "Wishlist"
   }
@@ -20,4 +20,5 @@ class GameLog < ApplicationRecord
   def display_status
     STATUS_OPTIONS[status]
   end
+
 end
