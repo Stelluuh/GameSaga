@@ -20,12 +20,6 @@ class GamesController < ApplicationController
         render json: game, status: :accepted
     end
 
-    def destroy
-        game = Game.find(params[:id])
-        game.destroy
-        head :no_content
-    end
-
     private
 
     def game_create_params
@@ -33,7 +27,7 @@ class GamesController < ApplicationController
     end
 
     def game_update_params
-        params.permit(:cover, :name, :platform, :genre_id, :genre_id)
+        params.permit(:cover, :name, :platform, :genre_id)
     end
 
 end

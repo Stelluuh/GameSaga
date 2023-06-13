@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :profiles, only: [:index, :create, :show, :update]
-  resources :games, only: [:index, :create, :show, :update, :destroy]
+  resources :games, only: [:index, :create, :show, :update]
   resources :game_logs, only: [:show, :update, :destroy]
   resources :genre, only: [:index]
 
@@ -14,5 +14,4 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   get '/users', to: 'users#index'
-  # get '/hello', to: 'application#hello_world'
 end
