@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
     end
 
     def render_unprocessable_entity invalid
-        render json: { errors: invalid.record.errors.full_messages }, status: :render_unprocessable_entity
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
     def authorize
@@ -23,8 +23,5 @@ class ApplicationController < ActionController::API
       render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_user
   end
 
-    # def hello_world
-    #   session[:count] = (session[:count] || 0) + 1
-    #   render json: { count: session[:count] }
-    # end
+
 end
