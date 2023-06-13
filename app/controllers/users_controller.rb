@@ -2,12 +2,12 @@ class UsersController < ApplicationController
 
     skip_before_action :authorize, only: [:create] 
     
-
+    # LOGIN
     def show
-        render json: @current_user
+        render json: @current_user 
     end
 
-    #sign up
+    # SIGNUP
     def create
         user = User.create!(user_params)
         session[:user_id] = user.id #logs in user
@@ -15,10 +15,6 @@ class UsersController < ApplicationController
     end
 
     private
-
-    def find_user
-        user = User.find_by(id: params[:id])
-    end
 
     def user_params
         params.permit(:username, :email, :password, :password_confirmation)
