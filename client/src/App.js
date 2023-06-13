@@ -1,7 +1,7 @@
 // client/src/components/App.js
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { UserProvider } from './context/AuthContext'
+// import { UserProvider } from './context/AuthContext'
 import Home from './Components/Home'
 
 function App() {
@@ -15,11 +15,11 @@ function App() {
 
   return (
       <div className="App">
-        <UserProvider>
+        {/* <UserProvider> */}
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
-        </UserProvider>
+        {/* </UserProvider> */}
       </div>
   );
 }
