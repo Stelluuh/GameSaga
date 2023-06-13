@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :profiles, only: [:index, :create, :show, :update]
-  resources :games, only: [:index, :create, :show, :destroy]
+  resources :games, only: [:index, :create, :show, :update, :destroy]
   resources :game_logs, only: [:show, :update, :destroy]
   resources :genre, only: [:index]
 
