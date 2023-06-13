@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# GameVault App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Summary
+The purpose of this app is to provide users with a platform to keep track of their gaming activities and manage their game collection. It allows users to organize and categorize their completed games, games in progress, and wishlist games. The app integrates with an external API to fetch comprehensive game data, including details such as release date, publisher, and genre. Users can also record additional stats and information about their gaming experiences, such as status, rating, and playtime. The app provides insights and statistics, allowing users to view their gaming habits and track their progress over time. Overall, the app aims to enhance the gaming experience by providing a centralized hub for managing and exploring one's gaming journey.
 
-In the project directory, you can run:
+## Features
+• Game Collection Management: Keep a record of your game collection, including completed games, games in progress, and games on your wishlist.
+• Game Details and Integration: Fetch comprehensive game data from an external API, including details like release date, publisher, and genre. Stay up to date with the latest information on your favorite games.
+• Game Logging and Stats: Log your gaming progress, including status, rating, playtime, and other custom stats. Gain insights into your gaming habits and track your progress over time.
+• User Profiles: Create personalized user profiles to showcase your gaming preferences, bio, and avatar. Connect with other gamers and share your gaming experiences.
+• Search and Discovery: Explore a vast library of games and search for specific games based on criteria like genre, platform, or developer. Discover new games to add to your collection.
+• Authentication and Security: Implement password protection and authentication to ensure the security of user accounts and data.
+• Error Handling and Validations: Implement robust error handling and validations to provide a smooth user experience and prevent data inconsistencies.
 
-### `npm start`
+## Tech Stack
+• Frontend: The frontend of the app is built using React.js, utilizing React Router for client-side routing. State management is handled with Redux, providing a centralized store for data management and sharing across components.
+• Backend: The backend of the app is built using Ruby on Rails, providing a RESTful API to handle data storage and retrieval. The database is managed using PostgreSQL, ensuring data persistence and reliability.
+• External API Integration: The app integrates with an external API to fetch game data, providing a seamless experience for users to access comprehensive information about their favorite games.
+• Deployment: The app is fully deployed and hosted on a cloud platform such as Heroku, ensuring accessibility and availability to users.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
+To get started with the Game Tracker App, follow these steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository: git clone <repository-url>
+2. Install dependencies: npm install (for frontend) and bundle install (for backend)
+3. Configure the environment variables for API access and database connection.
+4. Run database migrations: rails db:migrate db:seed
+5. Start the development server: npm start (for frontend) and rails s (for backend)
+6. Access the app in your web browser at http://localhost:3000.
 
-### `npm test`
+## Contributions and Feedback
+Contributions, bug reports, and feature requests are welcome! If you have any feedback or suggestions to improve the Game Tracker App, please feel free to open an issue on the GitHub repository.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
