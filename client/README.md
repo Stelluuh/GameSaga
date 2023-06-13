@@ -17,7 +17,7 @@ The purpose of this app is to provide users with a platform to keep track of the
 • Frontend: The frontend of the app is built using React.js, utilizing React Router for client-side routing. State management is handled with Redux, providing a centralized store for data management and sharing across components.
 • Backend: The backend of the app is built using Ruby on Rails, providing a RESTful API to handle data storage and retrieval. The database is managed using PostgreSQL, ensuring data persistence and reliability.
 • External API Integration: The app integrates with an external API to fetch game data, providing a seamless experience for users to access comprehensive information about their favorite games.
-• Deployment: The app is fully deployed and hosted on a cloud platform such as Heroku, ensuring accessibility and availability to users.
+• Deployment: The app is fully deployed and hosted on a cloud platform such as Render, ensuring accessibility and availability to users.
 
 ## Getting Started
 To get started with the Game Tracker App, follow these steps:
