@@ -9,6 +9,7 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [errorsList, setErrorsList] = useState([])
+ 
   const { handleSignup } = useContext(UserContext)
 
   const navigate = useNavigate()

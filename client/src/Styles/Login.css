@@ -1,11 +1,12 @@
-.signup-container {
+/* Login.css */
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
   
-  .signup-form {
+  .login-form {
     max-width: 400px;
     padding: 20px;
     background-color: #303030;
@@ -14,7 +15,7 @@
     margin: 20px;
   }
   
-  .signup-form h1 {
+  .login-form h1 {
     text-align: center;
     margin-bottom: 20px;
     background-color: #303030;
@@ -23,9 +24,8 @@
     text-transform: uppercase;
   }
   
-  .signup-form input[type='text'],
-  .signup-form input[type='email'],
-  .signup-form input[type='password'] {
+  .login-form input[type='text'],
+  .login-form input[type='password'] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -36,15 +36,13 @@
     font-size: 16px;
   }
   
-  .signup-form input[type='text']::placeholder,
-  .signup-form input[type='email']::placeholder,
-  .signup-form input[type='password']::placeholder {
+  .login-form input[type='text']::placeholder,
+  .login-form input[type='password']::placeholder {
     color: white;
     opacity: 0.7;
-    
   }
   
-  .signup-form button {
+  .login-form input[type='submit'] {
     width: 100%;
     padding: 10px;
     background-color: #2cb5e8;
@@ -57,18 +55,18 @@
     text-transform: uppercase;
   }
   
-  .signup-form .errors-list {
+  .login-form .errors-list {
     margin-top: 10px;
     padding: 0;
     color: #ff0000;
     list-style: none;
   }
   
-  .signup-form .errors-list li {
+  .login-form .errors-list li {
     margin-bottom: 5px;
   }
   
-  .signup-form .errors-list li:first-child {
+  .login-form .errors-list li:first-child {
     margin-top: 5px;
   }
   
