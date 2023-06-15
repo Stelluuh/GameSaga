@@ -13,49 +13,54 @@ loop do
     'Accept' => 'application/json'
   }, body: "fields aggregated_rating, aggregated_rating_count, cover.url, first_release_date, genres.name, involved_companies.company.name, name, platforms.name, player_perspectives.name, summary, total_rating, total_rating_count, artworks.url, screenshots.url, keywords.name; where genres != null & aggregated_rating > 70; limit #{limit}; offset #{offset};")
 
-  games_data = JSON.parse(response.body)
+  if response.code == 200
+    games_data = JSON.parse(response.body)
+    break if games_data.empty?
 
-  break if games_data.empty?
-
-  games = games_data.map do |game|
-    {
-      name: game['name'],
-      cover: game.dig('cover', 'url'),
-      platform: game.dig('platforms', 0, 'name'),
-      release_date: game['first_release_date'].to_i,
-      involved_company: game.dig('involved_companies', 0, 'company', 'name'),
-      player_perspective: game.dig('player_perspectives', 0, 'name'),
-      aggregated_rating: game['aggregated_rating'].to_i,
-      aggregated_rating_count: game['aggregated_rating_count'].to_i,
-      summary: game['summary'],
-      genre_attributes: { name: game.dig('genres', 0, 'name') },
-      artworks: game.dig('artworks')&.map { |artwork| artwork['url'] } || [],
-      screenshots: game.dig('screenshots')&.map { |screenshot| screenshot['url'] } || [],
-      keywords: game.dig('keywords')&.map { |keyword| keyword['name'] } || []
-    }
-  end
-
-  games.each do |game_data|
-    genre_attributes = game_data.delete(:genre_attributes)
-    genre = Genre.find_or_create_by!(genre_attributes)
-    game = genre.games.build(game_data)
-
-    # Additional conditional checks
-    if game.valid?
-      game.save!
-    else
-      puts "Skipping invalid game: #{game.name}"
-      puts "Attributes causing the error:"
-      puts game.errors.full_messages.inspect
-      puts "Game data:"
-      puts game_data.inspect
+    games = games_data.map do |game|
+      {
+        name: game['name'],
+        cover: game.dig('cover', 'url'),
+        platform: game.dig('platforms', 0, 'name'),
+        release_date: game['first_release_date'].to_i,
+        involved_company: game.dig('involved_companies', 0, 'company', 'name'),
+        player_perspective: game.dig('player_perspectives', 0, 'name'),
+        aggregated_rating: game['aggregated_rating'].to_i,
+        aggregated_rating_count: game['aggregated_rating_count'].to_i,
+        summary: game['summary'],
+        genre_attributes: { name: game.dig('genres', 0, 'name') },
+        artworks: game.dig('artworks')&.map { |artwork| artwork['url'] } || [],
+        screenshots: game.dig('screenshots')&.map { |screenshot| screenshot['url'] } || [],
+        keywords: game.dig('keywords')&.map { |keyword| keyword['name'] } || []
+      }
     end
-  end
 
-  offset += limit
+    games.each do |game_data|
+      genre_attributes = game_data.delete(:genre_attributes)
+      genre = Genre.find_or_create_by!(genre_attributes)
+      game = genre.games.build(game_data)
+
+      if game.valid?
+        game.save!
+      else
+        puts "Skipping invalid game: #{game.name}"
+        # puts "Attributes causing the error:"
+        # puts game.errors.full_messages.inspect
+        # puts "Game data:"
+        # puts game_data.inspect
+      end
+    end
+
+    offset += limit
+  else
+    puts "Error: #{response.code}"
+    puts response.body
+    break
+  end
 end
 
 puts 'Seeding Completed!'
+
 
 
 
