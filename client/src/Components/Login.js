@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const { handleLogin } = useContext(UserContext);
+  const { login } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -30,7 +30,8 @@ const Login = () => {
         console.log('from login- user:', user);
 
         if (!user.errors) {
-          handleLogin(user);
+          console.log('logged in!')
+          login(user);
           navigate('/');
         } else {
           setUsername('');

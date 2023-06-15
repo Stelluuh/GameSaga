@@ -10,7 +10,7 @@ const Signup = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [errorsList, setErrorsList] = useState([])
  
-  const { handleSignup } = useContext(UserContext)
+  const { signup } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -32,7 +32,8 @@ const Signup = () => {
       .then(response => response.json())
       .then(user => {
         if (!user.errors) {
-          handleSignup(user)
+          console.log(user)
+          signup(user)
           navigate('/')
         } else {
           const listErrors = user.errors.map((error) => <li>{error}</li>)

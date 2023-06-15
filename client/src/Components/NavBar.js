@@ -4,12 +4,20 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import '../Styles/NavBar.css';
 
 const NavBar = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, logout } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // Handle logout logic here
-    navigate('/logout');
+    fetch('/logout', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(() => {
+        console.log('logged out')
+        logout()
+        navigate('/')
+      })
   };
 
   return (

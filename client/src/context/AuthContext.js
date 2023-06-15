@@ -27,17 +27,17 @@ const UserProvider = ({ children }) => {
         checkLogin()
     }, [isLoggedIn])
 
-    const handleSignup = (user) => {
+    const signup = (user) => {
         setUser(user)
         setIsLoggedIn(true)
     }
 
-    const handleLogin = (user) => {
+    const login = (user) => {
         setUser(user)
         setIsLoggedIn(true)
     }
 
-    const handleLogout = () => {
+    const logout = () => {
         setUser({})
         setIsLoggedIn(false)
         navigate('/login')
@@ -50,9 +50,9 @@ const UserProvider = ({ children }) => {
             user,
             isLoggedIn,
             errors,
-            handleSignup,
-            handleLogin,
-            handleLogout
+            signup,
+            login,
+            logout
         }}>
             {children}
         </UserContext.Provider>
