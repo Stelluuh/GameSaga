@@ -22,7 +22,7 @@ loop do
       name: game['name'],
       cover: game.dig('cover', 'url'),
       platform: game.dig('platforms', 0, 'name'),
-      release_date: game['first_release_date'],
+      release_date: game['first_release_date'].to_i,
       involved_company: game.dig('involved_companies', 0, 'company', 'name'),
       player_perspective: game.dig('player_perspectives', 0, 'name'),
       aggregated_rating: game['aggregated_rating'].to_i,
