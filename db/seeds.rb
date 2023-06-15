@@ -45,6 +45,10 @@ loop do
       game.save!
     else
       puts "Skipping invalid game: #{game.name}"
+      puts "Attributes causing the error:"
+      puts game.errors.full_messages.inspect
+      puts "Game data:"
+      puts game_data.inspect
     end
   end
 
