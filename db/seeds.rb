@@ -52,11 +52,11 @@ loop do
     end
 
     offset += limit
-  else
-    puts "Error: #{response.code}"
-    puts response.body
-    break
-  end
+  # else
+  #   puts "Error: #{response.code}"
+  #   puts response.body
+  #   break
+  # end
 end
 
 puts 'Seeding Completed!'
