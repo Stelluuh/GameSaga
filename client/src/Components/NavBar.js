@@ -14,7 +14,7 @@ const NavBar = () => {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(() => {
-        // console.log('logged out')
+        console.log('logged out')
         logout()
         navigate('/')
       })
