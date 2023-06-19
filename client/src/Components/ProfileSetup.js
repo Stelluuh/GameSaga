@@ -19,7 +19,7 @@ const ProfileSetup = () => {
 
         fetch('profiles', {
             method: 'POST',
-            headers: 'Content-Type': 'application/json',
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 name: name,
                 age: age,
