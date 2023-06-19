@@ -23,19 +23,25 @@ const Profile = () => {
     return (
       <div className="profile-container">
         <div className="profile-card">
-          <h2>{user.username}'s Profile</h2>
-          <div className="profile-details">
+          <h2>Account Details</h2>
+          <div className="account-details">
             <p><label>Username:</label> {user.username}</p>
             <p><label>Email:</label> {user.email}</p>
-            {profile && profile.name && <p><label>Name:</label> {profile.name}</p>}
-            {profile && profile.age && <p><label>Age:</label> {profile.age}</p>}
-            {profile && profile.avatar && <p><label>Avatar:</label> {profile.avatar}</p>}
-            {profile && profile.bio && <p><label>Bio:</label> {profile.bio}</p>}
-            {profile && profile.total_games_played && <p><label>Total Games Played:</label> {profile.total_games_played}</p>}
-            {profile && profile.favorite_genre && <p><label>Favorite Genre:</label> {profile.favorite_genre}</p>}
-            {profile && profile.hours_played && <p><label>Hours Played:</label> {profile.hours_played}</p>}
+          </div>
+          <hr />
+          <br />
+          <h2>Profile Details</h2>
+          <div className="profile-details">
+            {profile && profile.avatar && <img src={profile.avatar} alt="Avatar" />}
+            <p><label>Name:</label>{profile && profile.name && <span> {profile.name}</span>}</p>
+            <p><label>Age:</label>{profile && profile.age && <span> {profile.age}</span>}</p>
+            <p><label>Bio:</label>{profile && profile.bio && <span> {profile.bio}</span>}</p>
+            <p><label>Total Games Played:</label>{profile && profile.total_games_played && <span> {profile.total_games_played}</span>}</p>
+            <p><label>Favorite Genre:</label>{profile && profile.favorite_genre && <span> {profile.favorite_genre}</span>}</p>
+            <p><label>Hours Played:</label>{profile && profile.hours_played && <span> {profile.hours_played}</span>}</p>
           </div>
           <button onClick={handleEditProfile}>Edit Profile</button>
+          <hr />
         </div>
       </div>
     );
