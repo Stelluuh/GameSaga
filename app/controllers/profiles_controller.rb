@@ -26,6 +26,7 @@ class ProfilesController < ApplicationController
         render json: @profile, status: :accepted
     end
 
+
     private
 
     def profile_params

@@ -7,7 +7,6 @@ import NavBar from "./Components/NavBar";
 import Signup from './Components/Signup'
 import Login from "./Components/Login";
 import Profile from "./Components/Profile";
-import EditProfile from "./Components/EditProfile";
 import './Styles/App.css'
 
 

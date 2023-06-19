@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import '../Styles/NavBar.css';
 
 const NavBar = () => {
-  const { isLoggedIn, logout } = useContext(UserContext);
+  const { isLoggedIn, logout, user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -14,7 +14,7 @@ const NavBar = () => {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(() => {
-        console.log('logged out')
+        // console.log('logged out')
         logout()
         navigate('/')
       })
@@ -26,9 +26,14 @@ const NavBar = () => {
         <button className="navbar-button">Home</button>
       </NavLink>
       {isLoggedIn ? (
-        <button className="navbar-button" onClick={handleLogout}>
-          Logout
-        </button>
+        <>
+          <NavLink to={`/profiles/${user.username}`} className="navbar-link">
+            <button className="navbar-button">My Profile</button>
+          </NavLink>
+          <button className="navbar-button" onClick={handleLogout}>
+            Logout
+          </button>
+        </>
       ) : (
         <>
           <NavLink to="/login" className="navbar-link">
