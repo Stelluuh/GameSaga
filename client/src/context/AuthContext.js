@@ -55,7 +55,6 @@ const UserProvider = ({ children }) => {
     }
 
     const addProfile = (profile) => {
-        console.log(profile);
         fetch(`/profiles/${profile.id}`, {
           method: 'PATCH',
           headers: {
@@ -65,12 +64,11 @@ const UserProvider = ({ children }) => {
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log(data)
             setUser({ ...user, profile: data }); // Update only the profile property
           });
+
       };
-      
-
-
 
     return(
         <UserContext.Provider value={{

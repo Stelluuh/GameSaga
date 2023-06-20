@@ -1,16 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import '../Styles/ProfileForm.css';
 
 const ProfileForm = ({ setEditing }) => {
-  const { user, addProfile } = useContext(UserContext);
+  const { user, addProfile, genres } = useContext(UserContext);
   const [name, setName] = useState(user.profile.name || '');
   const [age, setAge] = useState(user.profile.age || '');
   const [avatar, setAvatar] = useState(user.profile.avatar || '');
   const [bio, setBio] = useState(user.profile.bio || '');
-  const [totalGamesPlayed, setTotalGamesPlayed] = useState(user.profile.total_games_played || '');
+  const [totalGamesPlayed, setTotalGamesPlayed] = useState(user.profile.total_games_played || 0);
   const [favoriteGenre, setFavoriteGenre] = useState(user.profile.favorite_genre || '');
-  const [hoursPlayed, setHoursPlayed] = useState(user.profile.hours_played || '');
+  const [hoursPlayed, setHoursPlayed] = useState(user.profile.hours_played || 0);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +30,8 @@ const ProfileForm = ({ setEditing }) => {
     };
 
     addProfile(updatedProfile);
-    
+    setEditing(false);
+
   };
 
   return (
@@ -59,11 +63,19 @@ const ProfileForm = ({ setEditing }) => {
         </label>
         <label>
           Favorite Genre:
-          <input
+          <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
+            <option value="N/A">Select Genre</option>
+            {genres.map((genre) => (
+              <option key={genre.id} value={genre.name}>
+                {genre.name}
+              </option>
+            ))}
+          </select>
+          {/* <input
             type="text"
             value={favoriteGenre}
             onChange={(e) => setFavoriteGenre(e.target.value)}
-          />
+          /> */}
         </label>
         <label>
           Hours Played:
