@@ -17,7 +17,6 @@ const UserProvider = ({ children }) => {
             .then(response => response.json())
             .then(data => {
                 setUser(data)
-                console.log(user)
         
                 if (data.errors) {
                     setIsLoggedIn(false)
@@ -55,6 +54,23 @@ const UserProvider = ({ children }) => {
         setErrors([])
     }
 
+    const addProfile = (profile) => {
+        console.log(profile);
+        fetch(`/profiles/${profile.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(profile),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setUser({ ...user, profile: data }); // Update only the profile property
+          });
+      };
+      
+
+
 
     return(
         <UserContext.Provider value={{
@@ -64,7 +80,8 @@ const UserProvider = ({ children }) => {
             errors,
             signup,
             login,
-            logout
+            logout,
+            addProfile
         }}>
             {children}
         </UserContext.Provider>
