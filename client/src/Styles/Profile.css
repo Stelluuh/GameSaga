@@ -2,6 +2,7 @@
   text-align: center;
   padding: 40px;
   margin: 20px;
+  align-items: center;
 }
 
 .profile-card {
@@ -24,14 +25,10 @@
 }
 
 .profile-details label {
+  display: inline-block;
   font-weight: bold;
   margin-right: 10px;
-}
-
-.profile-details span {
-  display: block;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  width: 120px;
 }
 
 .account-details {
@@ -60,6 +57,7 @@
 
 .profile-card p:first-child {
   margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .profile-card img {
@@ -68,4 +66,8 @@
   height: auto;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+.profile-form-container {
+  margin-top: 20px;
 }
