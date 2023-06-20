@@ -71,11 +71,6 @@ const ProfileForm = ({ setEditing }) => {
               </option>
             ))}
           </select>
-          {/* <input
-            type="text"
-            value={favoriteGenre}
-            onChange={(e) => setFavoriteGenre(e.target.value)}
-          /> */}
         </label>
         <label>
           Hours Played:
