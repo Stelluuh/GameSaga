@@ -4,22 +4,37 @@ import EditProfile from './EditProfile';
 import '../Styles/Profile.css';
 
 const Profile = () => {
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState({})
+  const [editing, setEditing] = useState(false)
   const { user, isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     fetch(`/profiles/${user.id}`)
       .then(response => response.json())
       .then(userProfile => {
-        setProfile(userProfile);
+        setProfile(userProfile)
+        console.log(userProfile)
       });
   }, [user.id]);
 
-  const handleEditProfile = () => {
-    // console.log('edit profile');
-  };
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
+    return (
+      <div className="profile-container">
+        <div className="profile-card">
+          <h2>Profile</h2>
+          <p>Please login to view your profile.</p>
+        </div>
+      </div>
+    );
+  } else if (editing) { //if logged in and editing is true
+    return (
+      <div className="profile-container">
+        <EditProfile profile={profile} setProfile={setProfile} setEditing={setEditing} />
+      </div>
+    );
+
+  } else { // if logged in and not editing:
     return (
       <div className="profile-container">
         <div className="profile-card">
@@ -40,17 +55,8 @@ const Profile = () => {
             <p><label>Favorite Genre:</label>{profile && profile.favorite_genre && <span> {profile.favorite_genre}</span>}</p>
             <p><label>Hours Played:</label>{profile && profile.hours_played && <span> {profile.hours_played}</span>}</p>
           </div>
-          <button onClick={handleEditProfile}>Edit Profile</button>
+          <button onClick={() => setEditing(true)}>Edit Profile</button>
           <hr />
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="profile-container">
-        <div className="profile-card">
-          <h2>Profile</h2>
-          <p>Please login to view your profile.</p>
         </div>
       </div>
     );
