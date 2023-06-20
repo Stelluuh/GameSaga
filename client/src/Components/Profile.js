@@ -4,9 +4,8 @@ import ProfileForm from './ProfileForm';
 import '../Styles/Profile.css';
 
 const Profile = () => {
-  const { user, isLoggedIn } = useContext(UserContext);
-  const [editing, setEditing] = useState(false);
-  console.log(user.profile)
+  const { user, isLoggedIn } = useContext(UserContext)
+  const [editing, setEditing] = useState(false)
 
   if (!isLoggedIn) {
     return (
@@ -16,7 +15,7 @@ const Profile = () => {
           <p>Please login to view your profile.</p>
         </div>
       </div>
-    );
+    )
   } else if (editing) {
     return (
       <div className="profile-container">
