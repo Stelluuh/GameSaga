@@ -6,6 +6,7 @@ import '../Styles/Profile.css';
 const Profile = () => {
   const { user, isLoggedIn } = useContext(UserContext);
   const [editing, setEditing] = useState(false);
+  console.log(user.profile)
 
   if (!isLoggedIn) {
     return (
@@ -55,32 +56,32 @@ const Profile = () => {
           <br />
           <h2>Profile Details</h2>
           <div className="profile-details">
-            {user && user.avatar && <img src={user.avatar} alt="Avatar" />}
+            {user && user.profile.avatar && <img src={user.profile.avatar} alt="Avatar" />}
             {user && (
               <>
                 <p>
                   <label>Name:</label>
-                  <span>{user.name}</span>
+                  <span>{user.profile.name}</span>
                 </p>
                 <p>
                   <label>Age:</label>
-                  <span>{user.age}</span>
+                  <span>{user.profile.age}</span>
                 </p>
                 <p>
                   <label>Bio:</label>
-                  <span>{user.bio}</span>
+                  <span>{user.profile.bio}</span>
                 </p>
                 <p>
                   <label>Total Games Played:</label>
-                  <span>{user.total_games_played}</span>
+                  <span>{user.profile.total_games_played}</span>
                 </p>
                 <p>
                   <label>Favorite Genre:</label>
-                  <span>{user.favorite_genre}</span>
+                  <span>{user.profile.favorite_genre}</span>
                 </p>
                 <p>
                   <label>Hours Played:</label>
-                  <span>{user.hours_played}</span>
+                  <span>{user.profile.hours_played}</span>
                 </p>
               </>
             )}
