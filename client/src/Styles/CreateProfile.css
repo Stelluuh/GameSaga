@@ -68,4 +68,10 @@
   .create-profile-form .errors-list li {
     margin-bottom: 5px;
   }
+
+  h3 {
+    color: white;
+    text-align: center;
+    
+  }
   

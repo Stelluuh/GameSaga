@@ -51,6 +51,8 @@
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
+  padding: 8px 15px;
+  margin-top: 10px;
 }
 
 .profile-form .buttons-container {
@@ -65,4 +67,21 @@
 
 .profile-form .buttons-container button[type='button'] {
   background-color: #ff0000;
+}
+
+.profile-form select,
+.profile-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 16px;
+}
+
+.profile-form select option {
+  background-color: #303030;
+  color: white;
 }
