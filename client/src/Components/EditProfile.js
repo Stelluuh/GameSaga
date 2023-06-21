@@ -3,15 +3,15 @@ import { UserContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/ProfileForm.css';
 
-const ProfileForm = ({ setEditing }) => {
-  const { user, addProfile, genres } = useContext(UserContext);
-  const [name, setName] = useState(user.profile.name || '');
-  const [age, setAge] = useState(user.profile.age || '');
-  const [avatar, setAvatar] = useState(user.profile.avatar || '');
-  const [bio, setBio] = useState(user.profile.bio || '');
-  const [totalGamesPlayed, setTotalGamesPlayed] = useState(user.profile.total_games_played || 0);
-  const [favoriteGenre, setFavoriteGenre] = useState(user.profile.favorite_genre || '');
-  const [hoursPlayed, setHoursPlayed] = useState(user.profile.hours_played || 0);
+const EditProfile = ({ setEditing }) => {
+  const { user, editProfile, genres } = useContext(UserContext);
+  const [name, setName] = useState(user.profile?.name || '');
+  const [age, setAge] = useState(user.profile?.age || '');
+  const [avatar, setAvatar] = useState(user.profile?.avatar || '');
+  const [bio, setBio] = useState(user.profile?.bio || '');
+  const [totalGamesPlayed, setTotalGamesPlayed] = useState(user.profile?.total_games_played || 0);
+  const [favoriteGenre, setFavoriteGenre] = useState(user.profile?.favorite_genre || '');
+  const [hoursPlayed, setHoursPlayed] = useState(user.profile?.hours_played || 0);
 
   const navigate = useNavigate();
 
@@ -29,10 +29,21 @@ const ProfileForm = ({ setEditing }) => {
       hours_played: hoursPlayed,
     };
 
-    addProfile(updatedProfile);
+    editProfile(updatedProfile);
     setEditing(false);
 
   };
+
+  //q: why is this not working? I am getting genres.map is not a function
+  // const genresList = genres.map((genre) => (genre.name))
+  // a: genres is an object, not an array. I need to convert it to an array.
+  // q: how do I convert an object to an array?
+  // a: Object.values() returns an array of a given object's own enumerable property values
+  // const genresList = Object.values(genres)
+
+  //
+  const genresList = genres.map((genre) => (genre.name))
+  // console.log(genresList)
 
   return (
     <div className="profile-form-container">
@@ -65,9 +76,9 @@ const ProfileForm = ({ setEditing }) => {
           Favorite Genre:
           <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
             <option value="N/A">Select Genre</option>
-            {genres.map((genre) => (
+            {genresList.map((genre) => (
               <option key={genre.id} value={genre.name}>
-                {genre.name}
+                {genre}
               </option>
             ))}
           </select>
@@ -83,4 +94,4 @@ const ProfileForm = ({ setEditing }) => {
   );
 };
 
-export default ProfileForm;
+export default EditProfile;

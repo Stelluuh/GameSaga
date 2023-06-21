@@ -54,7 +54,7 @@ const UserProvider = ({ children }) => {
         setErrors([])
     }
 
-    const addProfile = (profile) => {
+    const editProfile = (profile) => {
         fetch(`/profiles/${profile.id}`, {
           method: 'PATCH',
           headers: {
@@ -79,7 +79,7 @@ const UserProvider = ({ children }) => {
             signup,
             login,
             logout,
-            addProfile
+            editProfile
         }}>
             {children}
         </UserContext.Provider>

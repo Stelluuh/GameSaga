@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../context/AuthContext';
-import ProfileForm from './ProfileForm';
+import EditProfile from './EditProfile';
 import '../Styles/Profile.css';
 
 const Profile = () => {
@@ -34,7 +34,7 @@ const Profile = () => {
           <h2>Profile Details</h2>
         </div>
         <div className="profile-form-container">
-          <ProfileForm setEditing={setEditing} />
+          <EditProfile setEditing={setEditing} />
         </div>
       </div>
     );
@@ -85,7 +85,7 @@ const Profile = () => {
               </>
             )}
           </div>
-
+          
           <button onClick={() => setEditing(true)}>Edit Profile</button>
           <hr />
         </div>
