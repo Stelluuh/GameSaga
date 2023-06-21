@@ -34,7 +34,7 @@ const Signup = () => {
         if (!user.errors) {
           console.log(user)
           signup(user)
-          navigate(`/profiles/${user.id}`);
+          navigate(`/create-profile`);
         } else {
           const listErrors = user.errors.map((error) => <li>{error}</li>)
           setErrorsList(listErrors)
@@ -46,6 +46,7 @@ const Signup = () => {
       })
   }
 
+  
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
