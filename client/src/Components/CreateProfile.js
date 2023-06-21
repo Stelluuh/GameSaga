@@ -38,7 +38,7 @@ const CreateProfile = () => {
     } else {
         // const genresList = genres?.map((genre) => (genre.name))
         const genresList = genres && Object.values(genres).flat().map((genre) => genre.name);
-        console.log(genresList)
+        // console.log(genresList)
   return (
     <div>
         <form onSubmit={handleSubmit} className="create-profile-form">
@@ -57,7 +57,7 @@ const CreateProfile = () => {
             <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
                 <option value="N/A">Select Genre</option>
                 {genresList.map((genre) => (
-                    <option key={genre.id} value={genre}>
+                    <option key={genre.name} value={genre}>
                         {genre}
                     </option>
                  ))}
