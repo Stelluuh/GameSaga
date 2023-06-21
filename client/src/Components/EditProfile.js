@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/ProfileForm.css';
+import '../Styles/EditProfile.css';
 
 const EditProfile = ({ setEditing }) => {
   const { user, editProfile, genres } = useContext(UserContext);
