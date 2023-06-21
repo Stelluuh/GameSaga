@@ -70,6 +70,18 @@ const UserProvider = ({ children }) => {
 
       };
 
+      const addProfile = (newProfile) => {
+        fetch('/profiles', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newProfile)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setUser({ ...user, profile: data })}) // Update only the profile property
+        }
+
     return(
         <UserContext.Provider value={{
             user,
@@ -79,7 +91,8 @@ const UserProvider = ({ children }) => {
             signup,
             login,
             logout,
-            editProfile
+            editProfile,
+            addProfile
         }}>
             {children}
         </UserContext.Provider>
