@@ -22,13 +22,13 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <NavLink exact to="/" className="navbar-link">
-        <button className="navbar-button">Home</button>
-      </NavLink>
       {isLoggedIn ? (
         <>
           <NavLink to={`/profiles/${user.username}`} className="navbar-link">
             <button className="navbar-button">My Profile</button>
+          </NavLink>
+          <NavLink to="/games" className="navbar-link">
+            <button className="navbar-button">Browse Games</button>
           </NavLink>
           <button className="navbar-button" onClick={handleLogout}>
             Logout
@@ -36,6 +36,9 @@ const NavBar = () => {
         </>
       ) : (
         <>
+          <NavLink exact to="/" className="navbar-link">
+            <button className="navbar-button">Home</button>
+          </NavLink>
           <NavLink to="/login" className="navbar-link">
             <button className="navbar-button">Login</button>
           </NavLink>

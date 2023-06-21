@@ -5,6 +5,7 @@ const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({});
+    const [games, setGames] = useState({}); // [game1, game2, game3
     const [genres, setGenres] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -29,6 +30,13 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
         checkLogin()
     }, [isLoggedIn])
+
+    useEffect(() => {
+        fetch('/games')
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }, [])
+
 
 
     useEffect(() => {
