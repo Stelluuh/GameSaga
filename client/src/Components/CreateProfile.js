@@ -7,7 +7,7 @@ import '../Styles/CreateProfile.css'
 const CreateProfile = () => {
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
-    const [avatar, setAvatar] = useState('')
+    const [avatar, setAvatar] = useState('https://emedia1.nhs.wales/HEIW2/cache/file/F4C33EF0-69EE-4445-94018B01ADCF6FD4_medium.png')
     const [bio, setBio] = useState('')
     const [totalGamesPlayed, setTotalGamesPlayed] = useState(0)
     const [favoriteGenre, setFavoriteGenre] = useState('')
@@ -32,11 +32,13 @@ const CreateProfile = () => {
         navigate(`/profiles/${user.username}`)
     }
 
-    const genresList = genres?.map((genre) => (genre.name))
-
+    
     if (!isLoggedIn) {
-        return <h1>Please Login</h1>
+        return <h3>Please login to view your profile.</h3>
     } else {
+        // const genresList = genres?.map((genre) => (genre.name))
+        const genresList = genres && Object.values(genres).flat().map((genre) => genre.name);
+        console.log(genresList)
   return (
     <div>
         <form onSubmit={handleSubmit} className="create-profile-form">
@@ -55,9 +57,9 @@ const CreateProfile = () => {
             <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
                 <option value="N/A">Select Genre</option>
                 {genresList.map((genre) => (
-                <option key={genre.id} value={genre.name}>
-                    {genre}
-                </option>
+                    <option key={genre.id} value={genre}>
+                        {genre}
+                    </option>
                  ))}
           </select>
             <label> Hours Played: </label>

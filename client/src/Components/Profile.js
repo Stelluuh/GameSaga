@@ -11,8 +11,7 @@ const Profile = () => {
     return (
       <div className="profile-container">
         <div className="profile-card">
-          <h2>Profile</h2>
-          <p>Please login to view your profile.</p>
+          <h3>Please login to view your profile.</h3>
         </div>
       </div>
     )

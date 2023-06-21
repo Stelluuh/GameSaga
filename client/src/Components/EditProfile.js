@@ -34,13 +34,6 @@ const EditProfile = ({ setEditing }) => {
 
   };
 
-  //q: why is this not working? I am getting genres.map is not a function
-  // const genresList = genres.map((genre) => (genre.name))
-  // a: genres is an object, not an array. I need to convert it to an array.
-  // q: how do I convert an object to an array?
-  // a: Object.values() returns an array of a given object's own enumerable property values
-  // const genresList = Object.values(genres)
-
   //
   const genresList = genres.map((genre) => (genre.name))
   // console.log(genresList)
@@ -88,6 +81,7 @@ const EditProfile = ({ setEditing }) => {
           <input type="number" value={hoursPlayed} onChange={(e) => setHoursPlayed(e.target.value)} />
         </label>
         <button type="submit">Save Profile</button>
+        <br />
         <button type="button" onClick={() => setEditing(false)}>Cancel</button>
       </form>
     </div>
