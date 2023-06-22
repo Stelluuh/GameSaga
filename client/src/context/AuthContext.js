@@ -34,9 +34,10 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
         fetch('/games')
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                setGames(data)
+            })
     }, [])
-
 
 
     useEffect(() => {
@@ -100,7 +101,8 @@ const UserProvider = ({ children }) => {
             login,
             logout,
             editProfile,
-            addProfile
+            addProfile,
+            // games
         }}>
             {children}
         </UserContext.Provider>
