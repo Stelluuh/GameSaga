@@ -71,7 +71,7 @@ const EditProfile = ({ setEditing }) => {
           <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
             <option value="N/A">Select Genre</option>
             {genresList.map((genre) => (
-              <option key={genre.id} value={genre}>
+              <option key={genre} value={genre}>
                 {genre}
               </option>
             ))}
