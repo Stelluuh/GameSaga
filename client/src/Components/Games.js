@@ -29,9 +29,9 @@ const Games = () => {
   const { isLoggedIn, games } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Simulating API fetch delay with useEffect
   useEffect(() => {
     setIsLoading(true);
-    // Simulating API fetch delay with setTimeout
     setTimeout(() => {
       setIsLoading(false);
     }, 6000); // Adjust the delay time as needed
