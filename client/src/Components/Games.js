@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../context/AuthContext';
 import { FixedSizeList as List } from 'react-window';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,14 +27,32 @@ const GameTableRow = ({ game, style }) => {
 
 const Games = () => {
   const { isLoggedIn, games } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    // Simulating API fetch delay with setTimeout
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 6000); // Adjust the delay time as needed
+  }, []);
 
   if (!isLoggedIn) {
     return <h3>Please login to view your games.</h3>;
   }
 
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <h1 style={{ color: 'white' }}>Browse Games</h1>
       <div className="container" style={{ height: '100vh' }}>
         <div className="row font-weight-bold text-light bg-dark justify-content-between">
           <div className="col">Cover</div>
