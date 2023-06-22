@@ -11,7 +11,7 @@ loop do
     'Client-ID' => client_id,
     'Authorization' => "Bearer #{authorization}",
     'Accept' => 'application/json'
-  }, body: "fields aggregated_rating, aggregated_rating_count, cover.url, first_release_date, genres.name, involved_companies.company.name, name, platforms.name, player_perspectives.name, summary, total_rating, total_rating_count, artworks.url, screenshots.url, keywords.name; where genres != null & aggregated_rating > 70; limit #{limit}; offset #{offset};")
+  }, body: "fields aggregated_rating, aggregated_rating_count, cover.url, first_release_date, genres.name, involved_companies.company.name, name, platforms.name, player_perspectives.name, summary, artworks.url, screenshots.url, keywords.name; where genres != null & aggregated_rating > 79; limit #{limit}; offset #{offset};")
 
   if response.code == 200
     games_data = JSON.parse(response.body)
