@@ -5,7 +5,7 @@ const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({});
-    const [games, setGames] = useState({}); // [game1, game2, game3
+    const [games, setGames] = useState([]); 
     const [genres, setGenres] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -36,15 +36,18 @@ const UserProvider = ({ children }) => {
             .then(response => response.json())
             .then(data => {
                 setGames(data)
+                console.log(data)
             })
-    }, [])
+    }, [isLoggedIn])
 
 
     useEffect(() => {
         fetch('/genres')
             .then(response => response.json())
-            .then(data => setGenres(data))
-    }, [])
+            .then(data => {
+                setGenres(data)
+            })
+    }, [isLoggedIn])
 
     const signup = (user) => {
         setUser(user)
@@ -102,7 +105,7 @@ const UserProvider = ({ children }) => {
             logout,
             editProfile,
             addProfile,
-            // games
+            games
         }}>
             {children}
         </UserContext.Provider>
