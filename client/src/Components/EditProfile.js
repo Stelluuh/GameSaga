@@ -35,7 +35,8 @@ const EditProfile = ({ setEditing }) => {
   };
 
   //
-  const genresList = genres.map((genre) => (genre.name))
+  const genresList = genres && Object.values(genres).flat().map((genre) => genre.name);
+
   // console.log(genresList)
 
   return (
@@ -70,7 +71,7 @@ const EditProfile = ({ setEditing }) => {
           <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
             <option value="N/A">Select Genre</option>
             {genresList.map((genre) => (
-              <option key={genre.id} value={genre.name}>
+              <option key={genre.id} value={genre}>
                 {genre}
               </option>
             ))}
