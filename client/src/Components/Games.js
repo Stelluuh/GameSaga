@@ -184,6 +184,7 @@ const Games = () => {
           </div>
         ))}
 
+        {/* Choose Pages */}
         <nav>
           <ul className="pagination justify-content-center">
             <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
@@ -220,7 +221,7 @@ const Games = () => {
         </nav>
 
         <div className="text-center mt-3">
-          <span styel={{color: 'white'}}>Total Pages: {totalPages}</span>
+          <span>Total Pages: {totalPages}</span>
         </div>
       </div>
     </div>

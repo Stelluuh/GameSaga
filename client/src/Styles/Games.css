@@ -1,46 +1,54 @@
 /* Games.css */
 
 .row,
-.h1 {
+h1 {
   color: white;
 }
 
 .row.align-items-center > .col {
-    display: flex;
-    align-items: center;
-  }
-  
-  .row.header-row {
-    font-weight: bold;
-    color: white;
-    background-color: #343a40;
-  }
-  
-  .row.header-row > .col {
-    padding: 10px;
-  }
-  
-  .row.game-row > .col {
-    padding: 10px;
-    color: white;
-  }
-  
-  .row.game-row > .col:first-child {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .row.game-row > .col:first-child img {
-    max-width: 100px;
-    max-height: 100px;
-  }
-  
-  .row.game-row > .col:nth-child(2) {
-    flex-grow: 1;
-  }
-  
-  .row.game-row > .col:nth-child(7) {
-    display: flex;
-    justify-content: center;
-  }
-  
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.row.header-row {
+  font-weight: bold;
+  background-color: #343a40;
+}
+
+.row.header-row > .col {
+  padding: 10px;
+}
+
+.row.game-row > .col {
+  padding: 10px;
+  color: white;
+}
+
+.row.game-row > .col:first-child {
+  display: flex;
+  justify-content: center;
+}
+
+.row.game-row > .col:first-child img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.row.game-row > .col:nth-child(2) {
+  flex-grow: 1;
+}
+
+.row.game-row > .col:nth-child(7) {
+  display: flex;
+  justify-content: center;
+}
+
+/* Add space between each game row */
+.row.game-row + .row.game-row {
+  margin-top: 10px;
+}
+
+.text-center span {
+  color: white;
+}
