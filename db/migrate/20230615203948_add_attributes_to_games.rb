@@ -3,5 +3,6 @@ class AddAttributesToGames < ActiveRecord::Migration[7.0]
     add_column :games, :artworks, :string
     add_column :games, :screenshots, :string
     add_column :games, :keywords, :string
+    add_column :games, :websites, :string
   end
 end

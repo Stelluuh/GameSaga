@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_203948) do
     t.string "artworks"
     t.string "screenshots"
     t.string "keywords"
+    t.string "websites"
     t.index ["genre_id"], name: "index_games_on_genre_id"
   end
 
