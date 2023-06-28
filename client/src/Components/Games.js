@@ -66,7 +66,7 @@ const Games = () => {
         <List
           height={window.innerHeight - 56} // Subtract the height of the header row (adjust the value if needed)
           itemCount={games.length}
-          itemSize={100}
+          itemSize={200}
           width="100%"
         >
           {({ index, style }) => (

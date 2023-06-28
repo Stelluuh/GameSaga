@@ -4,7 +4,7 @@ import EditProfile from './EditProfile';
 import '../Styles/Profile.css';
 
 const Profile = () => {
-  const { user, isLoggedIn } = useContext(UserContext)
+  const { user, isLoggedIn, deleteAccount } = useContext(UserContext)
   const [editing, setEditing] = useState(false)
 
   if (!isLoggedIn) {
@@ -50,6 +50,7 @@ const Profile = () => {
               <label>Email:</label> {user.email}
             </p>
           </div>
+          <button onClick={() => deleteAccount()}>Delete Account</button>
           <hr />
           <br />
           <h2>Profile Details</h2>

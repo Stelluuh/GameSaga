@@ -66,6 +66,13 @@ const UserProvider = ({ children }) => {
         setErrors([])
     }
 
+    const deleteAccount = () => {
+        fetch(`/users/${user.id}`, {
+            method: 'DELETE'
+        })
+                logout()
+    }
+
     const editProfile = (profile) => {
         fetch(`/profiles/${profile.id}`, {
           method: 'PATCH',
@@ -105,7 +112,8 @@ const UserProvider = ({ children }) => {
             logout,
             editProfile,
             addProfile,
-            games
+            games,
+            deleteAccount
         }}>
             {children}
         </UserContext.Provider>

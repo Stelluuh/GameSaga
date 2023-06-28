@@ -20,6 +20,11 @@ class UsersController < ApplicationController
         render json: user, status: :created
     end
 
+    def destroy
+        @current_user.destroy
+        head :no_content
+    end
+
     private
 
     def user_params
