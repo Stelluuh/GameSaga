@@ -25,7 +25,7 @@ const GameDetails = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="container">
+      <div className="container text-center">
         <h3>Please Login or Signup</h3>
       </div>
     );
@@ -33,7 +33,7 @@ const GameDetails = () => {
 
   if (!game) {
     return (
-      <div className="container">
+      <div className="container text-center">
         <h3>Loading game details...</h3>
       </div>
     );
@@ -43,19 +43,10 @@ const GameDetails = () => {
 
   return (
     <div className="container">
-      <h3 className="mt-4">Game Details</h3>
-      <div className="row mt-4">
-        <div className="col-md-4">
-          <img src={game.cover} alt="Cover"  />
-        </div>
+      <div className="row justify-content-center mt-4">
+        
+        <h3>{game.name}</h3>
         <div className="col-md-8">
-          <h4>{game.name}</h4>
-          <h4>Rating: {game.aggregated_rating}/100</h4>
-          <h4>Platform: {game.platform}</h4>
-          <h4>Genre: {game.genre.name}</h4>
-          <h4>Release Date: {formatDate(game.release_date)}</h4>
-          <h4>Description: {game.summary}</h4>
-          <h4>Involved Company: {game.involved_company}</h4>
           {screenshots.length > 0 && (
             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
@@ -75,6 +66,17 @@ const GameDetails = () => {
               </button>
             </div>
           )}
+          <h4>Rating: {game.aggregated_rating}/100</h4>
+          <br />
+          <h4>Platform: {game.platform}</h4>
+          <br />
+          <h4>Genre: {game.genre.name}</h4>
+          <br />
+          <h4>Release Date: {formatDate(game.release_date)}</h4>
+          <br />
+          <h4>Description: {game.summary}</h4>
+          <br />
+          <h4>Involved Company: {game.involved_company}</h4>
         </div>
       </div>
     </div>
