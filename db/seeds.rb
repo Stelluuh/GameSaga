@@ -6,18 +6,26 @@ authorization = ENV['IGDB_AUTHORIZATION']
 limit = 500 # Maximum number of games to fetch per request
 offset = 0 # Initial offset value
 
+def screenshot_url(hash)
+  "https://images.igdb.com/igdb/image/upload/t_screenshot_med/#{hash}.jpg"
+end
+
 loop do
   response = HTTParty.post('https://api.igdb.com/v4/games/', headers: {
     'Client-ID' => client_id,
     'Authorization' => "Bearer #{authorization}",
     'Accept' => 'application/json'
-  }, body: "fields aggregated_rating, aggregated_rating_count, cover.url, first_release_date, genres.name, involved_companies.company.name, name, platforms.name, player_perspectives.name, summary, artworks.url, screenshots.url, keywords.name; where genres != null & aggregated_rating > 79; limit #{limit}; offset #{offset};")
+  }, body: "fields aggregated_rating, aggregated_rating_count, cover.url, first_release_date, genres.name, involved_companies.company.name, name, platforms.name, player_perspectives.name, summary, artworks.url, screenshots.url, keywords.name, websites.url; where genres != null & aggregated_rating > 79; limit #{limit}; offset #{offset};")
 
   if response.code == 200
     games_data = JSON.parse(response.body)
     break if games_data.empty?
 
     games = games_data.map do |game|
+      screenshots = game.dig('screenshots')&.map { |screenshot| screenshot['url'] } || []
+      screenshot_hashes = screenshots.map { |url| url.split('/').last.split('.').first }
+      medium_screenshots = screenshot_hashes.map { |hash| screenshot_url(hash) }
+
       {
         name: game['name'],
         cover: game.dig('cover', 'url'),
@@ -30,8 +38,9 @@ loop do
         summary: game['summary'],
         genre_attributes: { name: game.dig('genres', 0, 'name') },
         artworks: game.dig('artworks')&.map { |artwork| artwork['url'] } || [],
-        screenshots: game.dig('screenshots')&.map { |screenshot| screenshot['url'] } || [],
-        keywords: game.dig('keywords')&.map { |keyword| keyword['name'] } || []
+        screenshots: medium_screenshots,
+        keywords: game.dig('keywords')&.map { |keyword| keyword['name'] } || [],
+        websites: { url: game.dig('websites', 0, 'url') }
       }
     end
 
@@ -57,52 +66,3 @@ loop do
 end
 
 puts 'Seeding Completed!'
-
-
-
-
-#----------------- USE JSON DATA -----------------#
-# require 'json'
-
-# # Read the contents of the JSON file
-# json_data = File.read('db/IGDB_data.json')
-# data = JSON.parse(json_data)
-
-# # Iterate over the data and create records
-# data.each do |item|
-#   name = item['name']
-#   cover_url = item['cover']['url'] if item['cover']
-#   release_date = Time.at(item['first_release_date']) if item['first_release_date']
-#   involved_company = item['involved_companies']&.map { |company| company['company']['name'] }
-#   player_perspective = item['player_perspectives']&.map { |perspective| perspective['name'] }
-#   aggregated_rating = item['aggregated_rating'].to_i
-#   aggregated_rating_count = item['aggregated_rating_count']
-#   summary = item['summary']
-#   genre_name = item['genres']&.first&.dig('name')
-#   platform_names = item['platforms']&.map { |platform| platform['name'] }
-#   artworks_urls = item['artworks']&.map { |artwork| artwork['url'] }
-#   screenshots_urls = item['screenshots']&.map { |screenshot| screenshot['url'] }
-#   keywords_names = item['keywords']&.map { |keyword| keyword['name'] }
-
-#   # Find the genre by name or create a new one
-#   genre = Genre.find_or_create_by(name: genre_name)
-
-#   game = Game.create(
-#     name: name,
-#     cover: cover_url,
-#     platform: platform_names,  
-#     release_date: release_date,
-#     involved_company: involved_company,
-#     player_perspective: player_perspective,
-#     aggregated_rating: aggregated_rating,
-#     aggregated_rating_count: aggregated_rating_count,
-#     summary: summary,
-#     genre: genre,
-#     artworks: artworks_urls,
-#     screenshots: screenshots_urls,
-#     keywords: keywords_names
-#   )
-# end
-
-# puts 'Seeding Completed!'
-
