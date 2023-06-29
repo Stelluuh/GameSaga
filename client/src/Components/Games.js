@@ -1,97 +1,14 @@
-// import React, { useContext, useState, useEffect } from 'react';
-// import { UserContext } from '../context/AuthContext';
-// import { FixedSizeList as List } from 'react-window';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import '../Styles/Games.css';
-// import GameSearch from './GameSearch';
-
-// const formatDate = (timestamp) => {
-//   const date = new Date(timestamp * 1000);
-//   return date.toLocaleDateString();
-// };
-
-// const GameTableRow = ({ game, style }) => {
-//   return (
-//     <div className="row align-items-center" style={style}>
-//       <div className="col">
-//         <img src={game.cover} alt="cover" className="img-fluid " />
-//       </div>
-//       <div className="col">{game.name}</div>
-//       <div className="col">{game.genre.name}</div>
-//       <div className="col">{game.platform}</div>
-//       <div className="col">{formatDate(game.release_date)}</div>
-//       <div className="col">{game.involved_company}</div>
-//       <div className="col">{game.aggregated_rating}</div>
-//     </div>
-//   );
-// };
-
-// const Games = () => {
-//   const { isLoggedIn, games } = useContext(UserContext);
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   // Simulating API fetch delay with useEffect
-//   useEffect(() => {
-//     setIsLoading(true);
-//     setTimeout(() => {
-//       setIsLoading(false);
-//     }, 6000); // Adjust the delay time as needed
-//   }, []);
-
-//   if (!isLoggedIn) {
-//     return <h3>Please login to view your games.</h3>;
-//   }
-
-//   if (isLoading) {
-//     return (
-//       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-//         <div className="spinner-border text-primary" role="status">
-//           <span className="visually-hidden">Loading...</span>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div>
-//         <GameSearch />
-//       <div className="container" style={{ height: '100vh' }}>
-//         <div className="row font-weight-bold text-light bg-dark justify-content-between">
-//           <div className="col">Cover</div>
-//           <div className="col">Name</div>
-//           <div className="col">Genre</div>
-//           <div className="col">Platform</div>
-//           <div className="col">Release Date</div>
-//           <div className="col">Developer</div>
-//           <div className="col">Aggregated Rating</div>
-//         </div>
-
-
-//         <List
-//           height={window.innerHeight - 56} // Subtract the height of the header row (adjust the value if needed)
-//           itemCount={games.length}
-//           itemSize={200}
-//           width="100%"
-//         >
-//           {({ index, style }) => (
-//             <GameTableRow key={games[index].id} game={games[index]} style={style} />
-//           )}
-//         </List>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Games;
-
-// ----------------------- PAGINATION -----------------------
+// ----------------------- PAGINATION (PAGES) -----------------------
 
 import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../context/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles/Games.css';
 import GameSearch from './GameSearch';
+import GameDetails from './GameDetails';
 
+// convert from Unix timestamp to MM/DD/YYYY
 const formatDate = (timestamp) => {
   const date = new Date(timestamp * 1000);
   return date.toLocaleDateString();
@@ -99,6 +16,7 @@ const formatDate = (timestamp) => {
 
 const Games = () => {
   const { isLoggedIn, games } = useContext(UserContext);
+
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 100; 
@@ -106,15 +24,11 @@ const Games = () => {
   const maxVisiblePages = 5; 
   const [visiblePages, setVisiblePages] = useState([]);
 
-  // Q: what does this do?
-  // a: it simulates API fetch delay with useEffect
-    //q: why do I need it?
-  // A: 
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 6000); 
+    }, 5000); 
   }, []);
 
   useEffect(() => {
@@ -146,7 +60,7 @@ const Games = () => {
     );
   }
 
-  // Get current games
+  // Get current games per page
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = games.slice(indexOfFirstGame, indexOfLastGame);
@@ -158,7 +72,6 @@ const Games = () => {
 
   return (
     <div>
-      <GameSearch />
       <div className="container">
         <div className="row font-weight-bold text-light bg-dark justify-content-between">
           <div className="col">Cover</div>
@@ -168,23 +81,32 @@ const Games = () => {
           <div className="col">Release Date</div>
           <div className="col">Developer</div>
           <div className="col">Aggregated Rating</div>
+          <div className="col">View</div>
+          <div className='col'>Status</div>
         </div>
 
-        {currentGames.map((game) => (
-          <div className="row align-items-center" key={game.id}>
-            <div className="col">
-              <img src={game.cover} alt="cover" className="img-fluid" />
+        {currentGames.map((game) => {
+          const gameLog = game.game_log;
+          return (
+            <div className="row align-items-center" key={game.id} onClick={() => console.log('clicked game detail', game.id)}>
+              <div className="col">
+                <img src={game.cover} alt="cover" className="img-fluid" />
+              </div>
+              <div className="col">{game.name}</div>
+              <div className="col">{game.genre.name}</div>
+              <div className="col">{game.platform}</div>
+              <div className="col">{formatDate(game.release_date)}</div>
+              <div className="col">{game.involved_company}</div>
+              <div className="col">{game.aggregated_rating}</div>
+              <Link to={`/games/${game.id}`} className="col">
+                <p>View</p>
+              </Link>
+              <div className="col">{gameLog ? gameLog.status : ''}</div>
             </div>
-            <div className="col">{game.name}</div>
-            <div className="col">{game.genre.name}</div>
-            <div className="col">{game.platform}</div>
-            <div className="col">{formatDate(game.release_date)}</div>
-            <div className="col">{game.involved_company}</div>
-            <div className="col">{game.aggregated_rating}</div>
-          </div>
-        ))}
+          );
+        })}
 
-        {/* Choose Pages */}
+        {/* Choose Pages: From Bootstarp */}
         <nav>
           <ul className="pagination justify-content-center">
             <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
