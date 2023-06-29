@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :library_games
 
   resources :profiles, only: [:index, :create, :show, :update]
   resources :games, only: [:index, :create, :show, :update]

@@ -2,6 +2,7 @@ class User < ApplicationRecord
     has_one :profile, dependent: :destroy
     has_many :game_logs
     has_many :games, through: :game_logs
+    has_many :library_games, through: :game_logs
 
     has_secure_password
 
