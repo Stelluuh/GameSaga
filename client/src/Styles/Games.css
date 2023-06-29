@@ -5,6 +5,11 @@ h1 {
   color: white;
 }
 
+.game-row:hover {
+  background-color: #555555; 
+  cursor: pointer;
+}
+
 .row.align-items-center > .col {
   display: flex;
   align-items: center;
