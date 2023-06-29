@@ -21,7 +21,7 @@ const GameDetails = () => {
           console.log(data);
         });
     }
-  }, [isLoggedIn, id]);
+  }, [isLoggedIn, id]); 
 
   if (!isLoggedIn) {
     return (
@@ -39,7 +39,8 @@ const GameDetails = () => {
     );
   }
 
-  const screenshots = JSON.parse(game.screenshots);
+  // -------------------------------CAROUSEL FROM BOOTSTRAP ---------------------------------
+  const screenshots = JSON.parse(game.screenshots); 
 
   return (
     <div className="container">
@@ -47,7 +48,7 @@ const GameDetails = () => {
         
         <h3>{game.name}</h3>
         <div className="col-md-8">
-          {screenshots.length > 0 && (
+          {screenshots.length > 0 && ( // if there are screenshots, render the carousel
             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                 {screenshots.map((screenshot, index) => (
@@ -66,6 +67,9 @@ const GameDetails = () => {
               </button>
             </div>
           )}
+
+          {/* ----------------------------- GAME DETAILS ----------------------------- */}
+          
           <h4>Rating: {game.aggregated_rating}/100</h4>
           <br />
           <h4>Platform: {game.platform}</h4>
