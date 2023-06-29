@@ -1,7 +1,5 @@
-// ----------------------- PAGINATION (PAGES) -----------------------
-
 import React, { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles/Games.css';
@@ -19,16 +17,16 @@ const Games = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const gamesPerPage = 100; 
+  const gamesPerPage = 100;
   const totalPages = Math.ceil(games.length / gamesPerPage);
-  const maxVisiblePages = 5; 
+  const maxVisiblePages = 5;
   const [visiblePages, setVisiblePages] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000); 
+    }, 5000);
   }, []);
 
   useEffect(() => {
@@ -45,6 +43,8 @@ const Games = () => {
       setVisiblePages(Array.from({ length: maxVisiblePages }, (_, index) => startPage + index));
     }
   }, [currentPage, maxVisiblePages, totalPages]);
+
+  const navigate = useNavigate();
 
   if (!isLoggedIn) {
     return <h3>Please login to view your games.</h3>;
@@ -70,6 +70,10 @@ const Games = () => {
     setCurrentPage(pageNumber);
   };
 
+  const handleGameClick = (gameId) => {
+    navigate(`/games/${gameId}`);
+  };
+
   return (
     <div>
       <div className="container">
@@ -81,14 +85,13 @@ const Games = () => {
           <div className="col">Release Date</div>
           <div className="col">Developer</div>
           <div className="col">Aggregated Rating</div>
-          <div className="col">View</div>
-          <div className='col'>Status</div>
+          <div className="col">Player Status</div>
         </div>
 
         {currentGames.map((game) => {
           const gameLog = game.game_log;
           return (
-            <div className="row align-items-center" key={game.id} onClick={() => console.log('clicked game detail', game.id)}>
+            <div className="row align-items-center game-row" key={game.id} onClick={() => handleGameClick(game.id)}>
               <div className="col">
                 <img src={game.cover} alt="cover" className="img-fluid" />
               </div>
@@ -98,10 +101,7 @@ const Games = () => {
               <div className="col">{formatDate(game.release_date)}</div>
               <div className="col">{game.involved_company}</div>
               <div className="col">{game.aggregated_rating}</div>
-              <Link to={`/games/${game.id}`} className="col">
-                <p>View</p>
-              </Link>
-              <div className="col">{gameLog ? gameLog.status : ''}</div>
+              <div className="col">{gameLog ? gameLog.status : 'n/a'}</div>
             </div>
           );
         })}
