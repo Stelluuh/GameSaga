@@ -9,6 +9,7 @@ import Login from "./Components/Login";
 import Profile from "./Components/Profile";
 import CreateProfile from "./Components/CreateProfile";
 import Games from "./Components/Games";
+import GameDetails from "./Components/GameDetails";
 import './Styles/App.css'
 
 
@@ -25,6 +26,8 @@ function App() {
             <Route path="/profiles/:id" element={<Profile />} />
             <Route path="/create-profile" element={<CreateProfile />} />
             <Route path="/games" element={<Games />} />
+            <Route path="/games/:id" element={<GameDetails />} />
+            <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </UserProvider>
       </div>
