@@ -81,6 +81,7 @@ const GameDetails = () => {
           <h4>Description: {game.summary}</h4>
           <br />
           <h4>Involved Company: {game.involved_company}</h4>
+
         </div>
       </div>
     </div>
