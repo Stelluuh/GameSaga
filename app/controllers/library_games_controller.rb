@@ -3,11 +3,11 @@ class LibraryGamesController < ApplicationController
 
     def index
         library_games = @current_user.library_games
-        render.json: library_games
+        render json: library_games
     end
 
     def show
-        render.json: @library_games
+        render json: @library_games
     end
 
     def create
@@ -28,6 +28,6 @@ class LibraryGamesController < ApplicationController
     private
 
     def library_game_params
-        params.permit(:status)
+        params.permit(:status, :game_id, :user_id)
     end
 end
