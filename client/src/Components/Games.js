@@ -22,11 +22,13 @@ const Games = () => {
   const maxVisiblePages = 5;
   const [visiblePages, setVisiblePages] = useState([]);
 
+  const navigate = useNavigate();
+  
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 6000);
   }, []);
 
   useEffect(() => {
@@ -44,7 +46,8 @@ const Games = () => {
     }
   }, [currentPage, maxVisiblePages, totalPages]);
 
-  const navigate = useNavigate();
+
+
 
   if (!isLoggedIn) {
     return <h3>Please login to view your games.</h3>;
@@ -101,7 +104,7 @@ const Games = () => {
               <div className="col">{formatDate(game.release_date)}</div>
               <div className="col">{game.involved_company}</div>
               <div className="col">{game.aggregated_rating}</div>
-              <div className="col">{gameLog ? gameLog.status : 'n/a'}</div>
+              <div className="col">{gameLog ? gameLog.status : 'Not Played'}</div>
             </div>
           );
         })}
