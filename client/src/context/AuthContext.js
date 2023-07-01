@@ -101,6 +101,7 @@ const UserProvider = ({ children }) => {
                 setUser({ ...user, profile: data })}) // Update only the profile property
         }
 
+
     return(
         <UserContext.Provider value={{
             user,
