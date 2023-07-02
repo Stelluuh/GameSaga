@@ -2,7 +2,7 @@ class GameLog < ApplicationRecord
   belongs_to :game
   belongs_to :user
 
-  validates :status, inclusion: { in: ['Not Started', 'In Progress', 'Did Not Finish', 'Complete', 'Wishlist'] }
+  validates :status, inclusion: { in: ['Not Played', 'In Progress', 'Abandoned', 'Complete', 'Wishlist'] }
   validates :rating, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 10 }, allow_nil: true
   validates :date_started, presence: true
   validates :date_stopped, presence: true, if: :completed?
