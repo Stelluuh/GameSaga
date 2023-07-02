@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :game_logs, only: [:show, :update, :destroy]
   resources :genres, only: [:index, :show, :create]
   resources :users, only: [:index, :show, :create, :update, :destroy]
-  resources :library_games, only: [:index, :show, :create, :update, :destroy]
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
