@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
+import GameLogForm from './GameLogForm';
 
 const formatDate = (timestamp) => {
   const date = new Date(timestamp * 1000);
@@ -8,9 +9,10 @@ const formatDate = (timestamp) => {
 };
 
 const GameDetails = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, updatePlayerStatus } = useContext(UserContext);
   const { id } = useParams();
   const [game, setGame] = useState(null);
+  const [status, setStatus] = useState('Not Played');
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -18,10 +20,10 @@ const GameDetails = () => {
         .then((response) => response.json())
         .then((data) => {
           setGame(data);
-          console.log(data);
+          setStatus(data.game_log?.status || 'Not Played');
         });
     }
-  }, [isLoggedIn, id]); 
+  }, [isLoggedIn, id]);
 
   if (!isLoggedIn) {
     return (
@@ -39,11 +41,28 @@ const GameDetails = () => {
     );
   }
 
+  const handleStatusChange = (selectedStatus) => {
+    setStatus(selectedStatus);
+    updatePlayerStatus(game.id, selectedStatus); 
+  };
+
   // -------------------------------CAROUSEL FROM BOOTSTRAP ---------------------------------
   const screenshots = JSON.parse(game.screenshots); 
 
   return (
     <div className="container">
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              {status}
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Not Played')}>Not Played</a></li>
+              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('In Progress')}>In Progress</a></li>
+              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Complete')}>Complete</a></li>
+              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Abandoned')}>Abandoned</a></li>
+              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Wishlist')}>Wishlist</a></li>
+            </ul>
+          </div>
       <div className="row justify-content-center mt-4">
         
         <h3>{game.name}</h3>
@@ -81,7 +100,8 @@ const GameDetails = () => {
           <h4>Description: {game.summary}</h4>
           <br />
           <h4>Involved Company: {game.involved_company}</h4>
-
+          <br />
+          <GameLogForm game={game} />
         </div>
       </div>
     </div>
