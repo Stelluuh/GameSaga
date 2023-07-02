@@ -7,7 +7,7 @@ limit = 500 # Maximum number of games to fetch per request
 offset = 0 # Initial offset value
 
 def screenshot_url(hash)
-  "https://images.igdb.com/igdb/image/upload/t_screenshot_med/#{hash}.jpg"
+  "https://images.igdb.com/igdb/image/upload/t_screenshot_big/#{hash}.jpg"
 end
 
 loop do
@@ -15,7 +15,7 @@ loop do
     'Client-ID' => client_id,
     'Authorization' => "Bearer #{authorization}",
     'Accept' => 'application/json'
-  }, body: "fields aggregated_rating, aggregated_rating_count, cover.url, first_release_date, genres.name, involved_companies.company.name, name, platforms.name, player_perspectives.name, summary, artworks.url, screenshots.url, keywords.name, websites.url; where genres != null & aggregated_rating > 79; limit #{limit}; offset #{offset};")
+  }, body: "fields aggregated_rating, aggregated_rating_count, cover.url, first_release_date, genres.name, involved_companies.company.name, name, platforms.name, player_perspectives.name, summary, artworks.url, screenshots.url, keywords.name, websites.url; where genres != null & aggregated_rating > 85; limit #{limit}; offset #{offset};")
 
   if response.code == 200
     games_data = JSON.parse(response.body)
@@ -29,7 +29,7 @@ loop do
       {
         name: game['name'],
         cover: game.dig('cover', 'url'),
-        platform: game.dig('platforms', 0, 'name'),
+        platforms: game.dig('platforms')&.map { |platform| platform['name'] },
         release_date: game['first_release_date'].to_i,
         involved_company: game.dig('involved_companies', 0, 'company', 'name'),
         player_perspective: game.dig('player_perspectives', 0, 'name'),
@@ -46,11 +46,16 @@ loop do
 
     games.each do |game_data|
       genre_attributes = game_data.delete(:genre_attributes)
+
+      # creates a genre in the database if it doesn't exist
       genre = Genre.find_or_create_by!(genre_attributes)
       game = genre.games.build(game_data)
 
+
+
       if game.valid?
         game.save!
+        
       else
         puts "Skipping invalid game: #{game.name}"
       end
