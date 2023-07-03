@@ -3,7 +3,7 @@ class CreateGames < ActiveRecord::Migration[7.0]
     create_table :games do |t|
       t.string :cover
       t.string :name
-      t.string :platform
+      t.string :platforms
       t.integer :release_date
       t.string :involved_company
       t.string :player_perspective
