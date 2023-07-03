@@ -1,16 +1,16 @@
 class GameLogsController < ApplicationController
     def show
-        game_log = GameLog.find(params[:id])
+        game_log = @current_user.game_logs.find(params[:id])
         render json: game_log
     end
 
     def create
-        game_log = GameLog.create!(game_log_params)
+        game_log = @current_user.game_log.create!(game_log_params)
         render json: game_log, status: :created
     end
 
     def update
-        game_log = GameLog.find(params[:id])
+        game_log = @current_user.game_logs.find(params[:id])
         game_log.update!(game_log_params)
         render json: game_log, status: :accepted
     end
