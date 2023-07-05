@@ -8,8 +8,9 @@ import Signup from './Components/Signup'
 import Login from "./Components/Login";
 import Profile from "./Components/Profile";
 import CreateProfile from "./Components/CreateProfile";
-import Games from "./Components/Games";
+import BrowseGames from "./Components/BrowseGames";
 import GameDetails from "./Components/GameDetails";
+import MyGames from "./Components/MyGames";
 import './Styles/App.css'
 
 
@@ -25,8 +26,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profiles/:id" element={<Profile />} />
             <Route path="/create-profile" element={<CreateProfile />} />
-            <Route path="/games" element={<Games />} />
+            <Route path="/games" element={<BrowseGames />} />
             <Route path="/games/:id" element={<GameDetails />} />
+            <Route path="/my_games" element={<MyGames />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </UserProvider>
