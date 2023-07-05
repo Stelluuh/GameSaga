@@ -12,12 +12,12 @@ const formatDate = (timestamp) => {
 };
 
 const BrowseGames = () => {
-  const { isLoggedIn, games } = useContext(UserContext);
+  const { isLoggedIn, allGames } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 100;
-  const totalPages = Math.ceil(games.length / gamesPerPage);
+  const totalPages = Math.ceil(allGames.length / gamesPerPage);
   const maxVisiblePages = 5;
   const [visiblePages, setVisiblePages] = useState([]);
 
@@ -65,7 +65,7 @@ const BrowseGames = () => {
   // Get current games per page
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
-  const currentGames = games.slice(indexOfFirstGame, indexOfLastGame);
+  const currentGames = allGames.slice(indexOfFirstGame, indexOfLastGame);
 
   // Change page
   const goToPage = (pageNumber) => {
