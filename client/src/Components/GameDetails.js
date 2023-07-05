@@ -13,7 +13,6 @@ const GameDetails = () => {
   const { id } = useParams();
   const [game, setGame] = useState(null);
 
-  console.log(user)
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -24,7 +23,7 @@ const GameDetails = () => {
 
         });
     }
-  }, [isLoggedIn, id]);
+  }, [isLoggedIn, id, user]);
 
   if (!isLoggedIn) {
     return (
@@ -88,7 +87,7 @@ const GameDetails = () => {
           <h4>Involved Company: {game.involved_company}</h4>
           <br />
           {/* if user has game in library, render "Added to Library" else render GameLogForm */}
-          {user.games.map((gameObj) => gameObj.id).includes(game.id) ? (<h3>Already in Library</h3>) : (<GameLogForm game={game} />)}
+          {user.games.map((gameObj) => gameObj.id).includes(game.id) ? (<h3>Added to Library</h3>) : (<GameLogForm game={game} />)}
           <br />
           </div>
       </div>
