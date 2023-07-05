@@ -17,20 +17,20 @@ const UserProvider = ({ children }) => {
         fetch('/me')
             .then(response => response.json())
             .then(data => {
-                setUser(data)
                 
                 if (data.errors) {
                     setIsLoggedIn(false)
                     setErrors(data.errors)
                 } else 
                 setIsLoggedIn(true)
+                setUser(data)
                 console.log(data)
             })
         }
 
     useEffect(() => {
         checkLogin()
-    }, [isLoggedIn, user.game_logs.length])
+    }, [isLoggedIn])
 
     
 
@@ -114,8 +114,12 @@ const UserProvider = ({ children }) => {
             .then(response => response.json())
             .then(newLog => {
                 console.log(newLog)
-                setUser({ ...user, game_logs: [...user.game_logs, newLog] })
+                setUser({ ...user, game_logs: [...user.game_logs, newLog], games: [...user.games, newLog.game] })
             })
+    }
+ 
+    const editGameLog = (gameLog) => {
+        console.log(gameLog)
     }
 
     const deleteGameLog = (gameLogId) => {
@@ -142,6 +146,7 @@ const UserProvider = ({ children }) => {
             allGames,
             deleteAccount,
             addGameLog,
+            editGameLog,
             deleteGameLog
         }}>
             {children}
