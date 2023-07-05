@@ -9,7 +9,8 @@ class ProfilesController < ApplicationController
     end
 
     def create
-        profile = @current_user.build_profile(profile_params) #build_profile comes from the has_one relationship in the User model
+        profile = @current_user.build_profile(profile_params) 
+        #build_profile comes from the has_one relationship in the User model
         if profile.save
             render json: profile, status: :created
         else
