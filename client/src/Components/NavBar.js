@@ -59,6 +59,15 @@ const NavBar = () => {
                   </NavLink>
                 </li>
                 <li className="nav-item">
+                  <NavLink
+                    to="/my_games"
+                    className="nav-link"
+                    activeClassName="active"
+                  >
+                    My Games
+                  </NavLink>
+                </li>
+                <li className="nav-item">
                   <button className="nav-link btn btn-link" onClick={handleLogout}>
                     Logout
                   </button>
