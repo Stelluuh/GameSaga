@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_203948) do
   enable_extension "plpgsql"
 
   create_table "game_logs", force: :cascade do |t|
-    t.integer "status"
+    t.string "status"
     t.integer "rating"
     t.date "date_started"
     t.date "date_stopped"
