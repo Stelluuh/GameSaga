@@ -9,10 +9,11 @@ const formatDate = (timestamp) => {
 };
 
 const GameDetails = () => {
-  const { isLoggedIn, updatePlayerStatus } = useContext(UserContext);
+  const { isLoggedIn, user } = useContext(UserContext);
   const { id } = useParams();
   const [game, setGame] = useState(null);
-  const [status, setStatus] = useState('Not Played');
+
+  console.log(user)
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -20,7 +21,7 @@ const GameDetails = () => {
         .then((response) => response.json())
         .then((data) => {
           setGame(data);
-          setStatus(data.game_log?.status || 'Not Played');
+
         });
     }
   }, [isLoggedIn, id]);
@@ -41,28 +42,13 @@ const GameDetails = () => {
     );
   }
 
-  const handleStatusChange = (selectedStatus) => {
-    setStatus(selectedStatus);
-    updatePlayerStatus(game.id, selectedStatus); 
-  };
+
 
   // -------------------------------CAROUSEL FROM BOOTSTRAP ---------------------------------
   const screenshots = JSON.parse(game.screenshots); 
 
   return (
     <div className="container">
-          <div class="btn-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              {status}
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Not Played')}>Not Played</a></li>
-              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('In Progress')}>In Progress</a></li>
-              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Complete')}>Complete</a></li>
-              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Abandoned')}>Abandoned</a></li>
-              <li><a class="dropdown-item" href="#" onClick={() => handleStatusChange('Wishlist')}>Wishlist</a></li>
-            </ul>
-          </div>
       <div className="row justify-content-center mt-4">
         
         <h3>{game.name}</h3>
@@ -101,8 +87,10 @@ const GameDetails = () => {
           <br />
           <h4>Involved Company: {game.involved_company}</h4>
           <br />
-          <GameLogForm game={game} />
-        </div>
+          {/* if user has game in library, render "Added to Library" else render GameLogForm */}
+          {user.games.map((gameObj) => gameObj.id).includes(game.id) ? (<h3>Already in Library</h3>) : (<GameLogForm game={game} />)}
+          <br />
+          </div>
       </div>
     </div>
   );
