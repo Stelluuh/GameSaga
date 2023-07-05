@@ -5,7 +5,7 @@ class GameLogsController < ApplicationController
     end
 
     def create
-        game_log = @current_user.game_log.create!(game_log_params)
+        game_log = @current_user.game_logs.create!(game_log_params)
         render json: game_log, status: :created
     end
 
@@ -13,6 +13,12 @@ class GameLogsController < ApplicationController
         game_log = @current_user.game_logs.find(params[:id])
         game_log.update!(game_log_params)
         render json: game_log, status: :accepted
+    end
+
+    def destroy
+        game_log = @current_user.game_logs.find(params[:id])
+        game_log.destroy
+        head :no_content, status: :deleted
     end
 
     private
