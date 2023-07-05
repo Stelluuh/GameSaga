@@ -111,14 +111,15 @@ const UserProvider = ({ children }) => {
             .then(response => response.json())
             .then(newLog => {
                 console.log(newLog)
-                // if(!newLog.errors) {
-                //     setUser({...user, game_logs: [...user.game_logs, newLog]})
-                //     setErrors([])
-                // } else {
-                //     const errorLi= newLog.errors.map(error => <li key={error}>{error}</li>)
-                //     setErrors(errorLi)
-                // }
+                setUser({ ...user, game_logs: [...user.game_logs, newLog] })
             })
+    }
+
+    const deleteGameLog = (gameLogId) => {
+        fetch(`/game_logs/${gameLogId}`, {
+            method: 'DELETE'
+        })
+        .then(setUser({ ...user, game_logs: user.game_logs.filter(gameLog => gameLog.id !== gameLogId)}))
     }
 
     
@@ -137,7 +138,8 @@ const UserProvider = ({ children }) => {
             addProfile,
             games,
             deleteAccount,
-            addGameLog
+            addGameLog,
+            deleteGameLog
         }}>
             {children}
         </UserContext.Provider>
