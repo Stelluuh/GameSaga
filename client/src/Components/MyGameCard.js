@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../context/AuthContext';
 
 const MyGameCard = ({ game }) => {
   const { name, genre, game_logs } = game;
+  const { deleteGameLog } = useContext(UserContext);
+
+  const handleDeleteGameLog = (gameLogId) => {
+    deleteGameLog(gameLogId);
+  };
 
   return (
     <div className="card mb-3">
@@ -21,6 +27,7 @@ const MyGameCard = ({ game }) => {
                     <th>Status</th>
                     <th>Rating</th>
                     <th>Hours Played</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,6 +36,10 @@ const MyGameCard = ({ game }) => {
                       <td>{log.status}</td>
                       <td>{log.rating}</td>
                       <td>{log.play_time}</td>
+                      <td>
+                        <button onClick={() => handleDeleteGameLog(log.id)}>Delete</button>
+                        <button>Edit</button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
