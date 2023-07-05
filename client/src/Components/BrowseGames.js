@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles/Games.css';
-import GameSearch from './GameSearch';
 import GameDetails from './GameDetails';
 
 // convert from Unix timestamp to MM/DD/YYYY
@@ -92,7 +91,7 @@ const BrowseGames = () => {
         </div>
 
         {currentGames.map((game) => {
-          console.log(game)
+          // console.log(game)
           // const gameLog = game.game_log;
           return (
             <div className="row align-items-center game-row" key={game.id} onClick={() => handleGameClick(game.id)}>
