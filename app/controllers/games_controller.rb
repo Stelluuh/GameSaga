@@ -1,7 +1,10 @@
 class GamesController < ApplicationController
 
+
     def index
-        render json: Game.all
+        games = Game.all.includes(:game_logs)
+        render json: games
+
     end
 
     def show
@@ -23,11 +26,11 @@ class GamesController < ApplicationController
     private
 
     def game_create_params
-        params.permit(:cover, :name, :platform, :release_date, :involved_company, :player_perspective, :aggregated_rating, :aggregated_rating_count, :summary, :genre_id)
+        params.permit(:cover, :name, :platforms, :release_date, :involved_company, :player_perspective, :aggregated_rating, :aggregated_rating_count, :summary, :genre_id)
     end
 
     def game_update_params
-        params.permit(:cover, :name, :platform, :genre_id)
+        params.permit(:cover, :name, :platforms, :genre_id)
     end
 
 end
