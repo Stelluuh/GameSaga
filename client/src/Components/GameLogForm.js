@@ -8,10 +8,10 @@ const GameLogForm = ({ game }) => {
   const [date_stopped, setDateStopped] = useState('')
   const [date_completed, setDateCompleted] = useState('')
   const [play_time, setPlayTime] = useState(0)
-  // const [isSubmitted, setIsSubmitted] = useState(false)
 
   const { addGameLog } = useContext(UserContext);
   // console.log(game.id)
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,11 +35,6 @@ const GameLogForm = ({ game }) => {
 
   return (
     <div>
-      {/* {isSubmitted && (
-        <div className="alert alert-success" role="alert">
-          Form submitted successfully!
-        </div>
-      )} */}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="status" className="form-label">
