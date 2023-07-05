@@ -5,7 +5,7 @@ const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({});
-    const [games, setGames] = useState([]); 
+    const [allGames, setAllGames] = useState([]); 
     const [genres, setGenres] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -18,25 +18,28 @@ const UserProvider = ({ children }) => {
             .then(response => response.json())
             .then(data => {
                 setUser(data)
-        
+                
                 if (data.errors) {
                     setIsLoggedIn(false)
                     setErrors(data.errors)
                 } else 
-                    setIsLoggedIn(true)
+                setIsLoggedIn(true)
+                console.log(data)
             })
         }
 
     useEffect(() => {
         checkLogin()
-    }, [isLoggedIn])
+    }, [isLoggedIn, user.game_logs.length])
+
+    
 
     useEffect(() => {
         fetch('/games')
             .then(response => response.json())
             .then(data => {
-                setGames(data)
-                // console.log(data)
+                setAllGames(data)
+                console.log(data)
             })
     }, [isLoggedIn])
 
@@ -122,7 +125,7 @@ const UserProvider = ({ children }) => {
         .then(setUser({ ...user, game_logs: user.game_logs.filter(gameLog => gameLog.id !== gameLogId)}))
     }
 
-    
+
 
 
     return(
@@ -136,7 +139,7 @@ const UserProvider = ({ children }) => {
             logout,
             editProfile,
             addProfile,
-            games,
+            allGames,
             deleteAccount,
             addGameLog,
             deleteGameLog
