@@ -20,6 +20,7 @@ class UsersController < ApplicationController
         render json: user, status: :created
     end
 
+    # deletes account
     def destroy
         @current_user.destroy
         head :no_content
