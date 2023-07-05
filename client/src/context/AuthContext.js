@@ -36,7 +36,7 @@ const UserProvider = ({ children }) => {
             .then(response => response.json())
             .then(data => {
                 setGames(data)
-                console.log(data)
+                // console.log(data)
             })
     }, [isLoggedIn])
 
@@ -101,6 +101,28 @@ const UserProvider = ({ children }) => {
                 setUser({ ...user, profile: data })}) // Update only the profile property
         }
 
+    const addGameLog = (newGameLog) => {
+        console.log(newGameLog)
+        fetch('/game_logs', {
+            method: 'POST',
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify(newGameLog)
+        })
+            .then(response => response.json())
+            .then(newLog => {
+                console.log(newLog)
+                // if(!newLog.errors) {
+                //     setUser({...user, game_logs: [...user.game_logs, newLog]})
+                //     setErrors([])
+                // } else {
+                //     const errorLi= newLog.errors.map(error => <li key={error}>{error}</li>)
+                //     setErrors(errorLi)
+                // }
+            })
+    }
+
+    
+
 
     return(
         <UserContext.Provider value={{
@@ -114,7 +136,8 @@ const UserProvider = ({ children }) => {
             editProfile,
             addProfile,
             games,
-            deleteAccount
+            deleteAccount,
+            addGameLog
         }}>
             {children}
         </UserContext.Provider>
