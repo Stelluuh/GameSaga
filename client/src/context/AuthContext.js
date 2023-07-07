@@ -24,7 +24,7 @@ const UserProvider = ({ children }) => {
                 } else 
                 setIsLoggedIn(true)
                 setUser(data)
-                console.log(data)
+                // console.log(data)
             })
         }
 
@@ -39,7 +39,6 @@ const UserProvider = ({ children }) => {
             .then(response => response.json())
             .then(data => {
                 setAllGames(data)
-                console.log(data)
             })
     }, [isLoggedIn])
 
@@ -86,7 +85,7 @@ const UserProvider = ({ children }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data)
+        
             setUser({ ...user, profile: data }); // Update only the profile property
           });
 
@@ -100,12 +99,11 @@ const UserProvider = ({ children }) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                
                 setUser({ ...user, profile: data })}) // Update only the profile property
         }
 
     const addGameLog = (newGameLog) => {
-        console.log(newGameLog)
         fetch('/game_logs', {
             method: 'POST',
             headers: { 'Content-Type' : 'application/json' },
@@ -113,23 +111,30 @@ const UserProvider = ({ children }) => {
         })
             .then(response => response.json())
             .then(newLog => {
-                console.log(newLog)
+                // console.log(newLog)
                 setUser({ ...user, game_logs: [...user.game_logs, newLog], games: [...user.games, newLog.game] })
             })
     }
  
-    const editGameLog = (gameLog) => {
-        console.log(gameLog)
+    const editGameLog = (gameLogId) => {
+        fetch(`/game_logs/${gameLogId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify(gameLogId)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                // setUser({ ...user, game_logs: [...user.game_logs, data] })
+            })
     }
 
     const deleteGameLog = (gameLogId) => {
         fetch(`/game_logs/${gameLogId}`, {
             method: 'DELETE'
         })
-        .then(setUser({ ...user, game_logs: user.game_logs.filter(gameLog => gameLog.id !== gameLogId)}))
+        .then(setUser({ ...user, game_logs: user.game_logs.filter(gameLog => gameLog.id !== gameLogId), games: user.games.filter( game => game.id !== game.game_logs.find(gameLog => gameLog.id === gameLogId)?.game_id)}))
     }
-
-
 
 
     return(
