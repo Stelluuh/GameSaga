@@ -1,13 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../context/AuthContext';
+import EditGameLog from './EditGameLog';
 
 const MyGameCard = ({ game }) => {
   const { name, genre, game_logs } = game;
-  const { deleteGameLog } = useContext(UserContext);
+  const { deleteGameLog, editGameLog } = useContext(UserContext);
+  const [editingLogId, setEditingLogId] = useState(null);
 
   const handleDeleteGameLog = (gameLogId) => {
     deleteGameLog(gameLogId);
   };
+
+  const handleEditGameLog = (gameLogId) => {
+    setEditingLogId(gameLogId);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingLogId(null)
+  }
+
+  const handleSaveGameLog = (editedLog) => {
+    editGameLog(editedLog)
+    setEditingLogId(null)
+  }
 
   return (
     <div className="card mb-3">
@@ -27,19 +42,35 @@ const MyGameCard = ({ game }) => {
                     <th>Status</th>
                     <th>Rating</th>
                     <th>Hours Played</th>
+                    <th>Date Start</th>
+                    <th>Date Stopped</th>
+                    <th>Date Completed</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {game_logs?.map((log) => (
                     <tr key={log.id}>
-                      <td>{log.status}</td>
-                      <td>{log.rating}</td>
-                      <td>{log.play_time}</td>
-                      <td>
-                        <button onClick={() => handleDeleteGameLog(log.id)}>Delete</button>
-                        <button>Edit</button>
-                      </td>
+                      { editingLogId === log.id ? (
+                        <EditGameLog 
+                          gameLog={log}
+                          onCancel={handleCancelEdit}
+                          onSave={handleSaveGameLog}                         
+                        />
+                      ) : (
+                        <>
+                          <td>{log.status}</td>
+                          <td>{log.rating}</td>
+                          <td>{log.play_time}</td>
+                          <td>{log.date_started}</td>
+                          <td>{log.date_stopped}</td>
+                          <td>{log.date_completed}</td>
+                          <td>
+                            <button onClick={() => handleDeleteGameLog(log.id)}>Delete</button>
+                            <button onClick={() => handleEditGameLog(log.id)}>Edit</button>
+                          </td>
+                        </>
+                      )}
                     </tr>
                   ))}
                 </tbody>
