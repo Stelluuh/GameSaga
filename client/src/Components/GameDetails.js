@@ -12,7 +12,10 @@ const GameDetails = () => {
   const { isLoggedIn, user } = useContext(UserContext);
   const { id } = useParams();
   const [game, setGame] = useState(null);
+  const [editing, setEditing] = useState(false);
 
+
+  //using params to grab the all games and finding the particular game.
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -46,6 +49,15 @@ const GameDetails = () => {
   // -------------------------------CAROUSEL FROM BOOTSTRAP ---------------------------------
   const screenshots = JSON.parse(game.screenshots); 
 
+  if(!isLoggedIn) {
+    return (
+      <div className="container text-center">
+        <h3>Please Login or Signup</h3>
+      </div>
+    );
+  } else if (editing) {
+    //do something
+  } else {
   return (
     <div className="container">
       <div className="row justify-content-center mt-4">
@@ -71,6 +83,7 @@ const GameDetails = () => {
               </button>
             </div>
           )}
+          
 
           {/* ----------------------------- GAME DETAILS ----------------------------- */}
           
@@ -92,7 +105,7 @@ const GameDetails = () => {
           </div>
       </div>
     </div>
-  );
+  )};
 };
 
 export default GameDetails;
