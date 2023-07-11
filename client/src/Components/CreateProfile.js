@@ -11,9 +11,9 @@ const CreateProfile = () => {
     const [age, setAge] = useState('')
     const [avatar, setAvatar] = useState('https://emedia1.nhs.wales/HEIW2/cache/file/F4C33EF0-69EE-4445-94018B01ADCF6FD4_medium.png')
     const [bio, setBio] = useState('')
-    // const [totalGamesPlayed, setTotalGamesPlayed] = useState(0)
+    const [totalGamesPlayed, setTotalGamesPlayed] = useState(0)
     const [favoriteGenre, setFavoriteGenre] = useState('')
-    // const [hoursPlayed, setHoursPlayed] = useState(0)
+    const [hoursPlayed, setHoursPlayed] = useState(0)
 
     const navigate = useNavigate()
 
@@ -25,9 +25,9 @@ const CreateProfile = () => {
             age: age,
             avatar: avatar,
             bio: bio,
-            // total_games_played: totalGamesPlayed,
+            total_games_played: totalGamesPlayed,
             favorite_genre: favoriteGenre,
-            // hours_played: hoursPlayed,
+            hours_played: hoursPlayed,
         }
         addProfile(newProfile)
         navigate(`/profiles/${user.username}`)
