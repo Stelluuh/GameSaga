@@ -116,16 +116,15 @@ const UserProvider = ({ children }) => {
             })
     }
  
-    const editGameLog = (gameLogId) => {
-        fetch(`/game_logs/${gameLogId}`, {
+    const editGameLog = (editedLog) => {
+        fetch(`/game_logs/${editedLog.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type' : 'application/json' },
-            body: JSON.stringify(gameLogId)
+            body: JSON.stringify(editedLog),
         })
             .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                // setUser({ ...user, game_logs: [...user.game_logs, data] })
+            .then(updatedLog => {
+                setUser({ ...user, game_logs: user.game_logs.map(gameLog => gameLog.id === updatedLog.id ? updatedLog : gameLog), games: user.games.map(game => game.id === updatedLog.game_id ? updatedLog.game : game) })
             })
     }
 
