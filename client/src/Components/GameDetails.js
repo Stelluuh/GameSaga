@@ -100,7 +100,7 @@ const GameDetails = () => {
           <h4>Involved Company: {game.involved_company}</h4>
           <br />
           {/* if user has game in library, render "Added to Library" else render GameLogForm */}
-          {user.games.map((gameObj) => gameObj.id).includes(game.id) ? (<h3>Added to Library</h3>) : (<GameLogForm game={game} />)}
+          {user.games.map((gameObj) => gameObj.id).includes(game.id) ? (<h3 style={{ color: 'blue' }} >Added to Library</h3>) : (<GameLogForm game={game} />)}
           <br />
           </div>
       </div>
