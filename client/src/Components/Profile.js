@@ -12,13 +12,23 @@ const Profile = () => {
   const { user, isLoggedIn, deleteAccount } = useContext(UserContext)
   const [editing, setEditing] = useState(false)
   const [chartData, setChartData] = useState(null)
+
+
+  //map through the users game_logs and return all play_time. Then use reduce to iterate through the games array and add up the total hours played
+  const totalHoursPlayed = user?.game_logs?.map(log => log.play_time).reduce((acc, total) => acc + total, 0)
+
+  const totalGamesPlayed = user?.game_logs?.filter(log => log.status === 'Complete' || log.status === 'In Progress').length
+
+
+
+  
   
   useEffect(() => {
     if (user && user.games) {
       const games = user.games.filter(game => game.status !== 'Wishlist' && game.status !== 'Not Played')
       const genres = games.map(game => game.genre)
       // uniqueGenres is an array of unique genres. It's used to create the chart labels.
-      const uniqueGenres = [...new Set(genres)]; //refactored from https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      // const uniqueGenres = [...new Set(genres)]; //refactored from https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
       // ...new Set(genres) is used to remove duplicate genres from the genres array.
       const chartData = {
         labels: [],
@@ -36,7 +46,7 @@ const Profile = () => {
   
         // Check if the genre already exists in the chart data
         const existingGenreIndex = chartData.labels.indexOf(genre)
-        if (existingGenreIndex !== -1) {
+        if (existingGenreIndex !== -1) { 
           // Update the existing data value for the genre
           chartData.datasets[0].data[existingGenreIndex]++
         } else {
@@ -163,7 +173,7 @@ const Profile = () => {
                 </p>
                 <p>
                   <label>Total Games Played:</label>
-                  <span>{user.profile?.total_games_played}</span>
+                  <span>{totalGamesPlayed}</span>
                 </p>
                 <p>
                   <label>Favorite Genre:</label>
@@ -171,7 +181,7 @@ const Profile = () => {
                 </p>
                 <p>
                   <label>Hours Played:</label>
-                  <span>{user.profile?.hours_played}</span>
+                  <span>{totalHoursPlayed}</span>
                 </p>
               </>
             )}
