@@ -10,10 +10,15 @@ const PieChart = ({ games }) => {
 
   useEffect(() => {
     if (games) {
+      // Filter out games that are in the wishlist or not played
       const filteredGames = games.filter(game => game.status !== 'Wishlist' && game.status !== 'Not Played');
+      // Get all genres from the filtered games
       const genres = filteredGames.map(game => game.genre);
-      const uniqueGenres = [...new Set(genres)];
+      // Get unique genres
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+      const uniqueGenres = [...new Set(genres)]; //creates a new array with only unique genres
 
+      // https://www.chartjs.org/docs/latest/charts/doughnut.html
       const data = {
         labels: [],
         datasets: [

@@ -9,7 +9,8 @@ import '../Styles/Chart.css';
 const Profile = () => {
   const { user, isLoggedIn, deleteAccount } = useContext(UserContext);
   const [editing, setEditing] = useState(false);
-//map through the users game_logs and return all play_time. Then use reduce to iterate through the games array and add up the total hours played
+//map through the users game_logs and return all play_time. 
+//Then use reduce to iterate through the games array and add up the total hours played
 const totalHoursPlayed = user?.game_logs?.map(log => log.play_time).reduce((acc, total) => acc + total, 0)
 
 const totalGamesPlayed = user?.game_logs?.filter(log => log.status === 'Complete' || log.status === 'In Progress').length
