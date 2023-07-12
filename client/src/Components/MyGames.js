@@ -7,17 +7,17 @@ const MyGames = () => {
   console.log(user);
 
   const gameList = user?.games?.map(game => {
-    return <MyGameCard key={game.id} game={game} />;
+    return <MyGameCard key={game.id} game={game} user={user} />;
   });
 
   return (
     <div>
       {isLoggedIn ? (
         <>
-          {gameList.length > 0 ? (
+          {gameList && gameList.length > 0 ? (
             gameList
           ) : (
-            <h3 style={{ color: 'red' }}>You currently have no games in your library.</h3>
+            <h3 style={{ color: 'white' }}>You currently have no games in your library.</h3>
           )}
         </>
       ) : (
