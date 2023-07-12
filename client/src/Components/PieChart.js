@@ -30,10 +30,12 @@ const PieChart = ({ games }) => {
         ]
       };
 
+      // Loop through each unique genre and get the count of each genre
       uniqueGenres.forEach(genre => {
         const genreName = genre.name;
         const count = genres.filter(g => g.name === genreName).length;
 
+        // Add the genre name, count, and colors to the chart data
         if (!data.labels.includes(genreName)) {
           data.labels.push(genreName);
           data.datasets[0].data.push(count);

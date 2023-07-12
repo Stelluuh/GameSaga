@@ -4,7 +4,6 @@ import MyGameCard from './MyGameCard';
 
 const MyGames = () => {
   const { user, isLoggedIn } = useContext(UserContext);
-  console.log(user);
 
   const gameList = user?.games?.map(game => {
     return <MyGameCard key={game.id} game={game} user={user} />;

@@ -24,9 +24,9 @@ const EditProfile = ({ setEditing }) => {
       age,
       avatar,
       bio,
-      total_games_played: totalGamesPlayed,
+
       favorite_genre: favoriteGenre,
-      hours_played: hoursPlayed,
+
     };
 
     editProfile(updatedProfile);
@@ -58,14 +58,7 @@ const EditProfile = ({ setEditing }) => {
           Bio:
           <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
         </label>
-        <label>
-          Total Games Played:
-          <input
-            type="number"
-            value={totalGamesPlayed}
-            onChange={(e) => setTotalGamesPlayed(e.target.value)}
-          />
-        </label>
+        
         <label>
           Favorite Genre:
           <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
@@ -77,10 +70,7 @@ const EditProfile = ({ setEditing }) => {
             ))}
           </select>
         </label>
-        <label>
-          Hours Played:
-          <input type="number" value={hoursPlayed} onChange={(e) => setHoursPlayed(e.target.value)} />
-        </label>
+        
         <button type="submit">Save Profile</button>
         <br />
         <button type="button" onClick={() => setEditing(false)}>Cancel</button>
