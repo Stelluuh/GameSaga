@@ -32,9 +32,7 @@ const totalGamesPlayed = user?.game_logs?.filter(log => log.status === 'Complete
             <p>
               <label>Username:</label> {user.username}
             </p>
-            <p>
-              <label>Email:</label> {user.email}
-            </p>
+
           </div>
           <hr />
           <br />
@@ -54,9 +52,7 @@ const totalGamesPlayed = user?.game_logs?.filter(log => log.status === 'Complete
             <p>
               <label>Username:</label> {user.username}
             </p>
-            <p>
-              <label>Email:</label> {user.email}
-            </p>
+
           </div>
           <button onClick={() => deleteAccount()}>Delete Account</button>
           <hr />

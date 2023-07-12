@@ -5,7 +5,6 @@ import '../Styles/Signup.css'
 
 const Signup = () => {
   const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [errorsList, setErrorsList] = useState([])
@@ -24,7 +23,6 @@ const Signup = () => {
       },
       body: JSON.stringify({
         username: username,
-        email: email,
         password: password,
         password_confirmation: passwordConfirmation
       })
@@ -32,14 +30,12 @@ const Signup = () => {
       .then(response => response.json())
       .then(user => {
         if (!user.errors) {
-          console.log(user)
           signup(user)
           navigate(`/create-profile`);
         } else {
           const listErrors = user.errors.map((error) => <li>{error}</li>)
           setErrorsList(listErrors)
           setUsername('')
-          setEmail('')
           setPassword('')
           setPasswordConfirmation('')
         }
@@ -59,14 +55,7 @@ const Signup = () => {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        <input
-          type="email"
-          placeholder="Email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+
         <input
           type="password"
           placeholder="Password"
