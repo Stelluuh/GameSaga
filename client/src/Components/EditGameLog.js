@@ -62,21 +62,21 @@ const EditGameLog = ({ gameLog, onCancel, onSave }) => {
       </td>
       <td>
         <input
-          type="text"
+          type="date"
           value={dateStarted}
           onChange={(e) => setDateStarted(e.target.value)}
         />
       </td>
       <td>
         <input
-          type="text"
+          type="date"
           value={dateStopped}
           onChange={(e) => setDateStopped(e.target.value)}
         />
       </td>
       <td>
         <input
-          type="text"
+          type="date"
           value={dateCompleted}
           onChange={(e) => setDateCompleted(e.target.value)}
         />

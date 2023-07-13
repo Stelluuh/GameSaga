@@ -28,6 +28,7 @@ const BarChart = ({ gameLogs }) => {
     const chartData = {
         labels:['Abandoned', 'Complete', 'In Progress', 'Not Played', 'Wishlist'],
         datasets: [{
+            label: 'Game Statuses',
             data: [
                 statusCounts['Abandoned'],
                 statusCounts['Complete'],
