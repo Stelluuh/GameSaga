@@ -68,11 +68,11 @@ const GameLogForm = ({ game }) => {
             value={rating}
             onChange={(e) => setRating(e.target.value)}
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Below Average</option>
+            <option value="3">3 - Average</option>
+            <option value="4">4 - Above Average</option>
+            <option value="5">5 - High</option>
           </select>
         </div>
         <div className="mb-3">
