@@ -22,6 +22,7 @@ const GameDetails = () => {
       fetch(`/games/${id}`)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setGame(data);
 
         });

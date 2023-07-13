@@ -111,10 +111,29 @@ const UserProvider = ({ children }) => {
         })
             .then(response => response.json())
             .then(newLog => {
+                if (newLog.errors) {
+                    setErrors(newLog.errors)
+                } else 
                 // console.log(newLog)
                 setUser({ ...user, game_logs: [...user.game_logs, newLog], games: [...user.games, newLog.game] })
             })
     }
+
+
+    // const checkLogin = () => {
+    //     fetch('/me')
+    //         .then(response => response.json())
+    //         .then(data => {
+                
+    //             if (data.errors) {
+    //                 setIsLoggedIn(false)
+    //                 setErrors(data.errors)
+    //             } else 
+    //             setIsLoggedIn(true)
+    //             setUser(data)
+    //             // console.log(data)
+    //         })
+    //     }
  
     const editGameLog = (editedLog) => {
         fetch(`/game_logs/${editedLog.id}`, {

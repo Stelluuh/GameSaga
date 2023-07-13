@@ -9,7 +9,7 @@ const GameLogForm = ({ game }) => {
   const [date_completed, setDateCompleted] = useState('')
   const [play_time, setPlayTime] = useState(0)
 
-  const { addGameLog } = useContext(UserContext);
+  const { addGameLog, errors } = useContext(UserContext);
   // console.log(game.id)
   
 
@@ -33,9 +33,14 @@ const GameLogForm = ({ game }) => {
     setPlayTime('')
   };
 
+  const displayErrors = () => {
+    return errors.map((error) => <p style={{color: 'red'}}key={error}>{error}</p>);
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        {displayErrors()}
         <div className="mb-3">
           <label htmlFor="status" className="form-label">
             Status
@@ -121,6 +126,12 @@ const GameLogForm = ({ game }) => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        {/* {errors.map((error, index) => (
+            <div key={index} className="alert alert-danger" role="alert">
+              {error}
+            </div>
+        ))} */}
+        
       </form>
     </div>
   );
