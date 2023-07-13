@@ -133,6 +133,9 @@ const UserProvider = ({ children }) => {
         })
             .then(response => response.json())
             .then(updatedLog => {
+                if(updatedLog.errors) {
+                    setErrors(updatedLog.errors)
+                } else
                 setUser({ ...user, game_logs: user.game_logs.map(gameLog => gameLog.id === updatedLog.id ? updatedLog : gameLog), games: user.games.map(game => game.id === updatedLog.game_id ? updatedLog.game : game) })
             })
     }

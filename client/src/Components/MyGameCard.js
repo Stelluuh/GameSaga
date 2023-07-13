@@ -4,7 +4,7 @@ import EditGameLog from './EditGameLog';
 
 const MyGameCard = ({ game }) => {
   const { name, genre } = game;
-  const { deleteGameLog, editGameLog, user } = useContext(UserContext);
+  const { deleteGameLog, editGameLog, user, errors } = useContext(UserContext);
   const [editingLogId, setEditingLogId] = useState(null);
 
   const handleDeleteGameLog = (gameLogId) => {
@@ -23,6 +23,10 @@ const MyGameCard = ({ game }) => {
     editGameLog(editedLog);
     setEditingLogId(null);
   };
+
+  const displayErrors = () => {
+    return errors.map((error) => <p style={{color: 'red'}}key={error}>{error}</p>);
+  }
 
   const gameLogs = user.game_logs?.filter((log) => log.game_id === game.id);
 
@@ -70,6 +74,7 @@ const MyGameCard = ({ game }) => {
                   )}
                 </tr>
               ))}
+              {displayErrors()}
             </tbody>
           </table>
         </div>
