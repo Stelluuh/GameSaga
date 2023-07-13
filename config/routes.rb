@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :library_games
 
-  resources :profiles, only: [:index, :create, :show, :update]
+  resources :profiles, only: [:create, :show, :update]
   resources :games, only: [:index, :show]
   resources :game_logs, only: [:create, :show, :update, :destroy]
   resources :genres, only: [:index]
