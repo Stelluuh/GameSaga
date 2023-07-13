@@ -3,11 +3,6 @@ class ProfilesController < ApplicationController
     before_action :authorize
     before_action :find_profile, only: [:show, :update]
 
-    def index
-        profiles = Profile.all
-        render json: profiles
-    end
-
     def create
         profile = @current_user.build_profile(profile_params) 
         #build_profile comes from the has_one relationship in the User model

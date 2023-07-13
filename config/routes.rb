@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   resources :library_games
 
   resources :profiles, only: [:index, :create, :show, :update]
-  resources :games, only: [:index, :create, :show, :update]
+  resources :games, only: [:index, :show]
   resources :game_logs, only: [:create, :show, :update, :destroy]
-  resources :genres, only: [:index, :show, :create]
+  resources :genres, only: [:index]
   resources :users, only: [:index, :show, :create, :update, :destroy]
 
   post '/login', to: 'sessions#create'
