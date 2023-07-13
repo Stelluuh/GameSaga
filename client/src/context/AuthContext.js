@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const UserContext = React.createContext();
 
@@ -11,6 +11,7 @@ const UserProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
     
     const navigate = useNavigate();
+    const location = useLocation();
 
 
     const checkLogin = () => {
@@ -32,7 +33,9 @@ const UserProvider = ({ children }) => {
         checkLogin()
     }, [isLoggedIn])
 
-    
+    useEffect(() => {
+        setErrors([])
+      }, [location.pathname])
 
     useEffect(() => {
         fetch('/games')
@@ -120,20 +123,7 @@ const UserProvider = ({ children }) => {
     }
 
 
-    // const checkLogin = () => {
-    //     fetch('/me')
-    //         .then(response => response.json())
-    //         .then(data => {
-                
-    //             if (data.errors) {
-    //                 setIsLoggedIn(false)
-    //                 setErrors(data.errors)
-    //             } else 
-    //             setIsLoggedIn(true)
-    //             setUser(data)
-    //             // console.log(data)
-    //         })
-    //     }
+    
  
     const editGameLog = (editedLog) => {
         fetch(`/game_logs/${editedLog.id}`, {
