@@ -54,7 +54,6 @@ const totalGamesPlayed = user?.game_logs?.filter(log => log.status === 'Complete
             </p>
 
           </div>
-          <button onClick={() => deleteAccount()}>Delete Account</button>
           <hr />
           <br />
           <h2>Profile Details</h2>
@@ -100,6 +99,11 @@ const totalGamesPlayed = user?.game_logs?.filter(log => log.status === 'Complete
         <div className="chart-container">
           {user && user.game_logs && <BarChart gameLogs={user.game_logs} />}
         </div>
+        <br />
+        <br />
+        <br />
+        <button className="delete-button" onClick={() => deleteAccount()}>Delete Account</button>
+
       </div>
     );
   }
