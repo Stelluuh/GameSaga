@@ -25,9 +25,10 @@ Frontend: The frontend of the app is built using React.js, utilizing React Route
 
 Backend: The backend of the app is built using Ruby on Rails, providing a RESTful API to handle data storage and retrieval. The database is managed using PostgreSQL, ensuring data persistence and reliability.
 
-Bootstrap: CSS framework for responsive web design. It provides a collection of pre-built components and styles that help enhance the visual appearance and responsiveness of the application.
+Bootstrap: CSS framework for responsive web design. used for styling and layout purposes.
 
 External API Integration: The app integrates with an external API from IGDB to fetch game data, providing a seamless experience for users to access comprehensive information about their favorite games.
+
 
 
 ## External Dependencies
