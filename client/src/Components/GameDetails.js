@@ -90,7 +90,7 @@ const GameDetails = () => {
           
           <h4>Rating: {game.aggregated_rating}/100</h4>
           <br />
-          <h4>Platform: {game.platform}</h4>
+          <h4>Platform: {game.platforms}</h4>
           <br />
           <h4>Genre: {game.genre.name}</h4>
           <br />
