@@ -93,23 +93,33 @@ const BrowseGames = () => {
           <div className="col">Aggregated Rating</div>
         </div>
 
-        {currentGames.map((game) => (
-          <div
-            className="row align-items-center game-row"
-            key={game.id}
-            onClick={() => handleGameClick(game.id)}
-          >
-            <div className="col">
-              <img src={game.cover} alt="cover" className="img-fluid" />
+          \* Loading Spinner *\
+          {isLoading ? (
+            <div className="text-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
-            <div className="col">{game.name}</div>
-            <div className="col">{game.genre.name}</div>
-            <div className="col">{game.platforms}</div>
-            <div className="col">{formatDate(game.release_date)}</div>
-            <div className="col">{game.involved_company}</div>
-            <div className="col">{game.aggregated_rating}</div>
           </div>
-        ))}
+          ) : (
+
+            currentGames.map((game) => (
+              <div
+                className="row align-items-center game-row"
+                key={game.id}
+                onClick={() => handleGameClick(game.id)}
+              >
+                <div className="col">
+                  <img src={game.cover} alt="cover" className="img-fluid" />
+                </div>
+                <div className="col">{game.name}</div>
+                <div className="col">{game.genre.name}</div>
+                <div className="col">{game.platforms}</div>
+                <div className="col">{formatDate(game.release_date)}</div>
+                <div className="col">{game.involved_company}</div>
+                <div className="col">{game.aggregated_rating}</div>
+              </div>
+            ))
+          )}
 
         {/* Choose Pages: From Bootstrap */}
         <nav>
