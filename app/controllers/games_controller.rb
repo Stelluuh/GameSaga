@@ -2,7 +2,8 @@ class GamesController < ApplicationController
 
 
     def index
-        games = Game.all.includes(:game_logs)
+        games = Game.all
+        # games = Game.all.includes(:game_logs)
         render json: games
 
     end
