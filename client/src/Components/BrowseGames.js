@@ -24,6 +24,8 @@ const BrowseGames = () => {
 
   const navigate = useNavigate();
 
+  // -------- Loading -------- //
+
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
@@ -31,6 +33,7 @@ const BrowseGames = () => {
     }, 3000);
   }, []);
 
+  // -------- Pagination -------- //
   useEffect(() => {
     if (totalPages <= maxVisiblePages) {
       setVisiblePages(Array.from({ length: totalPages }, (_, index) => index + 1));
@@ -46,6 +49,8 @@ const BrowseGames = () => {
     }
   }, [currentPage, maxVisiblePages, totalPages]);
 
+  // -------- Search -------- //
+
   const handleSearch = (query) => {
     setSearchQuery(query);
     setCurrentPage(1); //// reset page to 1 when searching
@@ -58,18 +63,21 @@ const BrowseGames = () => {
     if (!isLoggedIn) {
       return <h3>Please login to view your games.</h3>;
     }
-
+  
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = filteredGames.slice(indexOfFirstGame, indexOfLastGame);
-
+  
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // -------- Render -------- //
+
   const handleGameClick = (gameId) => {
     navigate(`/games/${gameId}`);
   };
+  
 
   return (
     <div>
