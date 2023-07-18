@@ -44,26 +44,29 @@ const Signup = () => {
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
         <h1>Signup</h1>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
-          placeholder="Username"
+          
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
 
+        <label htmlFor="password">Password</label>
         <input
           type="password"
-          placeholder="Password"
+          placeholder="minimum of 8 characters"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <label htmlFor="passwordConfirmation">Confirm Password</label>
         <input
           type="password"
-          placeholder="Confirm Password"
+          
           id="passwordConfirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
