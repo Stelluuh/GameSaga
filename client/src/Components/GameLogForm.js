@@ -25,12 +25,7 @@ const GameLogForm = ({ game }) => {
         play_time
     }
     addGameLog(gameLog)
-    setStatus('Not Played')
-    setRating('')
-    setDateStarted('')
-    setDateStopped('')
-    setDateCompleted('')
-    setPlayTime('')
+    
   };
 
   const displayErrors = () => {
