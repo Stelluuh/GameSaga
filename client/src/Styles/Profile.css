@@ -31,6 +31,11 @@
   width: 120px;
 }
 
+.avatar {
+  max-width: 150px;
+  max-height: 150px;
+}
+
 .account-details {
   color: #ffffff;
   text-align: left;
@@ -40,6 +45,7 @@
 .account-details label {
   font-weight: bold;
 }
+
 
 .profile-card button {
   background-color: #0078d7;

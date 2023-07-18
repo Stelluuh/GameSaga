@@ -58,7 +58,7 @@ const totalGamesPlayed = user?.game_logs?.filter(log => log.status === 'Complete
           <br />
           <h2>Profile Details</h2>
           <div className="profile-details">
-            {user && user.profile?.avatar && <img src={user.profile?.avatar} alt="Avatar" />}
+            {user && user.profile?.avatar && <img className='avatar' src={user.profile?.avatar} alt="Avatar" />}
             {user && (
               <>
                 <p>
