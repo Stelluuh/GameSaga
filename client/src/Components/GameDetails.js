@@ -15,8 +15,6 @@ const GameDetails = () => {
   const [editing, setEditing] = useState(false);
 
 
-  //using params to grab the all games and finding the particular game.
-
   useEffect(() => {
     if (isLoggedIn) {
       fetch(`/games/${id}`)
@@ -53,7 +51,7 @@ const GameDetails = () => {
   if(!isLoggedIn) {
     return (
       <div className="container text-center">
-        <h3>Please Login or Signup</h3>
+        <h3 style={{color: 'white'}}>Please Login or Signup</h3>
       </div>
     );
   } else if (editing) {
@@ -68,7 +66,7 @@ const GameDetails = () => {
           {screenshots.length > 0 && ( // if there are screenshots, render the carousel
             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
-                {screenshots.map((screenshot, index) => (
+                {screenshots?.map((screenshot, index) => (
                   <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
                     <img src={screenshot} className="d-block w-100" alt={`Screenshot ${index + 1}`} />
                   </div>
