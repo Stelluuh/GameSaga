@@ -35,19 +35,13 @@ const BrowseGames = () => {
 
   // -------- Pagination -------- //
   useEffect(() => {
-    if (totalPages <= maxVisiblePages) {
-      setVisiblePages(Array.from({ length: totalPages }, (_, index) => index + 1));
-    } else {
-      const middlePage = Math.ceil(maxVisiblePages / 2);
-      let startPage = currentPage - middlePage + 1;
-      if (startPage < 1) {
-        startPage = 1;
-      } else if (startPage + maxVisiblePages > totalPages) {
-        startPage = totalPages - maxVisiblePages + 1;
-      }
-      setVisiblePages(Array.from({ length: maxVisiblePages }, (_, index) => startPage + index));
-    }
+    const middlePage = Math.ceil(maxVisiblePages / 2);
+    const startPage = Math.max(currentPage - middlePage + 1, 1);
+    const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+    
+    setVisiblePages(Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index));
   }, [currentPage, maxVisiblePages, totalPages]);
+  
 
   // -------- Search -------- //
 
