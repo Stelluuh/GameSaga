@@ -37,6 +37,7 @@ games_data.each do |game|
   genre = Genre.find_or_create_by!(genre_attributes)
   game = genre.games.build(game_data)
 
+  # Saves the game to the database if it's valid
   if game.valid?
     game.save!
   else
