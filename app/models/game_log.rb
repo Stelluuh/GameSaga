@@ -12,6 +12,7 @@ class GameLog < ApplicationRecord
   validate :date_started_valid
   validate :date_stopped_valid
   validate :date_completed_valid
+  validate :date_constraints
 
   
   private
@@ -58,5 +59,21 @@ class GameLog < ApplicationRecord
       errors.add(:date_completed, "must be before today")
     end
   end
+
+  def date_constraints
+    if status == 'Abandoned' && date_completed.present?
+      errors.add(:date_completed, 'cannot be set for Abandoned status')
+    end
+
+    if status == 'In Progress' && (date_stopped.present? || date_completed.present?)
+      errors.add(:date_stopped, 'cannot be set for In Progress status')
+      errors.add(:date_completed, 'cannot be set for In Progress status')
+    end
+
+    if status == 'Complete' && date_stopped.present?
+      errors.add(:date_stopped, 'cannot be set for Complete status')
+    end
+  end
+
 
 end
