@@ -66,7 +66,7 @@ const GameDetails = () => {
           {screenshots.length > 0 && ( // if there are screenshots, render the carousel
             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
-                {screenshots?.map((screenshot, index) => (
+                {screenshots.map((screenshot, index) => (
                   <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
                     <img src={screenshot} className="d-block w-100" alt={`Screenshot ${index + 1}`} />
                   </div>
