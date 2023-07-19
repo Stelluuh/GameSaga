@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-right">
       <div className="container">
-        <NavLink exact to="/" className="navbar-brand">
+        <NavLink to="/" className="navbar-brand">
         </NavLink>
         <button
           className="navbar-toggler"
@@ -75,7 +75,6 @@ const NavBar = () => {
               <>
                 <li className="nav-item">
                   <NavLink
-                    exact
                     to="/"
                     className="nav-link"
                     activeClassName="active"
