@@ -8,7 +8,7 @@ const SearchBar = ({ handleSearch }) => {
     handleSearch(searchQuery);
   };
 
-  //form from bootsrap
+  //from from bootsrap
   return (
     <div>
       <form onSubmit={handleSubmit}>
