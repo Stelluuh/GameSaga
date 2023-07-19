@@ -30,6 +30,38 @@ const MyGameCard = ({ game }) => {
 
   const gameLogs = user.game_logs?.filter((log) => log.game_id === game.id);
 
+ 
+  const displayGameLogs = () => {
+    return gameLogs?.map((log) => (
+      <div key={log.id}>
+        {editingLogId === log.id ? (
+          <EditGameLog
+            gameLog={log}
+            onCancel={handleCancelEdit}
+            onSave={handleSaveGameLog}
+          />
+        ) : (
+          <>
+            <p>Status: {log.status ? log.status : null}</p> 
+            {log.rating ? <p>Rating: {log.rating}</p> : null}
+            {log.play_time ? <p>Hours Played: {log.play_time}</p> : null}
+            {log.date_started ? <p>Date Started: {log.date_started}</p> : null}
+            {log.date_stopped ? <p>Date Stopped: {log.date_stopped}</p> : null}
+            {log.date_completed ? <p>Date Completed: {log.date_completed}</p> : null}
+            {displayErrors()}
+            <button className="btn btn-danger" onClick={() => handleDeleteGameLog(log.id)}>Delete</button>
+            <button className="btn btn-primary" onClick={() => handleEditGameLog(log.id)}>Edit</button>
+          </>
+        )}
+      </div>
+    ));
+  };
+
+
+
+//---------- 1st attempt at rendering fields based on status ----------//
+
+
   return (
     <div className="card bg-dark text-light mb-3">
       <div className="card-body">
@@ -84,3 +116,25 @@ const MyGameCard = ({ game }) => {
 };
 
 export default MyGameCard;
+
+
+//---------- 2nd attempt at rendering fields based on status ----------//
+
+
+//   return (
+//     <div className="card bg-dark text-light mb-3">
+//       <div className="card-body">
+//         <h5 className="card-title text-primary">{name}</h5>
+//         <p className="card-text">Genre: <span className="font-weight-bold">{genre.name}</span></p>
+//         <div>
+//           <div className="list-group">
+//             {displayGameLogs()}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+// export default MyGameCard;
