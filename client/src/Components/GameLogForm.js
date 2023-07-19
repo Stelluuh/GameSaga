@@ -29,7 +29,7 @@ const GameLogForm = ({ game }) => {
     return errors.map((error) => <p style={{ color: 'red' }} key={error}>{error}</p>);
   };
 
-  const renderDateFields = () => {
+  const renderFields = () => {
     if (status === 'In Progress') {
       return (
         <>
@@ -227,7 +227,7 @@ const GameLogForm = ({ game }) => {
           </select>
         </div>
         
-        {renderDateFields()}
+        {renderFields()}
         {status !== 'Wishlist' && (
           <button type="submit" className="btn btn-primary">
             Submit
