@@ -8,7 +8,6 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Handle logout logic here
     fetch('/logout', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }

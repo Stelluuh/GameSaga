@@ -21,7 +21,6 @@ const Home = () => {
         <p className="home-description">
           Manage your gaming activities, explore new games, and track your progress with GameSaga.
         </p>
-        {/* <button className="home-action-button">Get Started</button> */}
         <p className="home-subtext">
           Already have an account? <a href="/login">Log in</a>
         </p>
