@@ -43,12 +43,16 @@ The following external dependencies are used in this project:
 ## Getting Started
 To get started with the Game Tracker App, follow these steps:
 
-1. Clone the repository: git clone <repository-url>
-2. Install dependencies: npm install (for frontend) and bundle install (for backend)
-3. Configure the environment variables for API access and database connection.
-4. Run database migrations: rails db:migrate
-5. Start the development server: npm start (for frontend) and rails s (for backend)
-6. Access the app in your web browser at http://localhost:3000.
+
+1. Fork and Clone from GitHub: 
+   - https://github.com/Stelluuh/GameSaga
+2. To start the client-side frontend, run:
+    - npm install --prefix client
+    - npm start --prefix client
+3. to start the server-side, backend run:
+    - bundle install
+    - rails db:migrate db:seed
+
 
 ### Contributions and Feedback
 Contributions, bug reports, and feature requests are welcome! If you have any feedback or suggestions to improve the Game Tracker App, please feel free to open an issue on the GitHub repository.
