@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,  } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const UserContext = React.createContext();
@@ -123,23 +123,6 @@ const UserProvider = ({ children }) => {
     }
 
 
-    
- 
-    const editGameLog = (editedLog) => {
-        fetch(`/game_logs/${editedLog.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type' : 'application/json' },
-            body: JSON.stringify(editedLog),
-        })
-            .then(response => response.json())
-            .then(updatedLog => {
-                if(updatedLog.errors) {
-                    setErrors(updatedLog.errors)
-                } else
-                setUser({ ...user, game_logs: user.game_logs.map(gameLog => gameLog.id === updatedLog.id ? updatedLog : gameLog), games: user.games.map(game => game.id === updatedLog.game_id ? updatedLog.game : game) })
-            })
-    }
-
     const deleteGameLog = (gameLogId) => {
         fetch(`/game_logs/${gameLogId}`, {
             method: 'DELETE'
@@ -162,8 +145,8 @@ const UserProvider = ({ children }) => {
             allGames,
             deleteAccount,
             addGameLog,
-            editGameLog,
-            deleteGameLog
+            deleteGameLog,
+            setUser
         }}>
             {children}
         </UserContext.Provider>
