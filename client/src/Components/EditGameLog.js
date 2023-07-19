@@ -11,8 +11,6 @@ const EditGameLog = ({ gameLog, onCancel, onSave }) => {
 
   const handleSave = () => {
 
-    
-
     const editedLog = {
       ...gameLog,
       status,
@@ -25,6 +23,42 @@ const EditGameLog = ({ gameLog, onCancel, onSave }) => {
     onSave(editedLog)
     
   };
+
+  const renderRatingInput = () => {
+    if (status === 'Not Played' || status === 'Wishlist') {
+      return null
+    } else {
+      return(
+        <select
+          className="form-select"
+          id="rating"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+        >
+          <option value="--">--</option> 
+          <option value="1">1 - Low</option>
+          <option value="2">2 - Below Average</option>
+          <option value="3">3 - Average</option>
+          <option value="4">4 - Above Average</option>
+          <option value="5">5 - High</option>
+        </select>
+      )
+    }
+  }
+
+  const renderHoursPlayedInput = () => {
+    if (status === 'Not Played' || status === 'Wishlist') {
+      return null
+    } else {
+      return(
+        <input
+        type="text"
+        value={playTime}
+        onChange={(e) => setPlayTime(e.target.value)}
+      />
+      )
+    }
+  }
 
   const renderStartDateInput = () => {
     if ( status === 'Wishlist' || status === 'Not Played') {
@@ -68,41 +102,7 @@ const EditGameLog = ({ gameLog, onCancel, onSave }) => {
     }
   }
 
-  const renderRatingInput = () => {
-    if (status === 'Not Played' || status === 'Wishlist') {
-      return null
-    } else {
-      return(
-        <select
-          className="form-select"
-          id="rating"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-        >
-          <option value="--">--</option> 
-          <option value="1">1 - Low</option>
-          <option value="2">2 - Below Average</option>
-          <option value="3">3 - Average</option>
-          <option value="4">4 - Above Average</option>
-          <option value="5">5 - High</option>
-        </select>
-      )
-    }
-  }
-
-  const renderHoursPlayedInput = () => {
-    if (status === 'Not Played' || status === 'Wishlist') {
-      return null
-    } else {
-      return(
-        <input
-        type="text"
-        value={playTime}
-        onChange={(e) => setPlayTime(e.target.value)}
-      />
-      )
-    }
-  }
+  
         
 
 //---------- 1st attempt at rendering fields based on status ----------//
