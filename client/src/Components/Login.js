@@ -26,13 +26,8 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((user) => {
-        // console.log('from login- user.error:', user.error);
-        // console.log('from login- user:', user);
-
         if (!user.errors) {
           login(user);
-          // console.log(user)
-          // console.log(user.id)
           navigate(`/profiles/${user.id}`);
         } else {
           setUsername('');
