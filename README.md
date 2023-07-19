@@ -43,7 +43,6 @@ The following external dependencies are used in this project:
 ## Getting Started
 To get started with the Game Tracker App, follow these steps:
 
-
 1. Fork and Clone from GitHub: 
    - https://github.com/Stelluuh/GameSaga
 2. To start the client-side frontend, run:
