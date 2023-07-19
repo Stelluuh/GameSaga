@@ -16,11 +16,11 @@ const EditGameLog = ({ gameLog, onCancel, onSave }) => {
     const editedLog = {
       ...gameLog,
       status,
-      rating,
+      rating: status === 'Not Played' || status === 'Wishlist' ? null : rating,
       date_started: status === 'In Progress' || status === 'Complete' || status === 'Abandoned' ? dateStarted : null,
       date_stopped: status === 'Abandoned' ? dateStopped : null,
       date_completed: status === 'Complete' ? dateCompleted : null,
-      play_time: playTime,
+      play_time: status === 'Not Played' || status === 'Wishlist' ? null : playTime
     }
     onSave(editedLog)
     
@@ -68,6 +68,43 @@ const EditGameLog = ({ gameLog, onCancel, onSave }) => {
     }
   }
 
+  const renderRatingInput = () => {
+    if (status === 'Not Played' || status === 'Wishlist') {
+      return null
+    } else {
+      return(
+        <select
+          className="form-select"
+          id="rating"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+        >
+          <option value="--">--</option> 
+          <option value="1">1 - Low</option>
+          <option value="2">2 - Below Average</option>
+          <option value="3">3 - Average</option>
+          <option value="4">4 - Above Average</option>
+          <option value="5">5 - High</option>
+        </select>
+      )
+    }
+  }
+
+  const renderHoursPlayedInput = () => {
+    if (status === 'Not Played' || status === 'Wishlist') {
+      return null
+    } else {
+      return(
+        <input
+        type="text"
+        value={playTime}
+        onChange={(e) => setPlayTime(e.target.value)}
+      />
+      )
+    }
+  }
+        
+
 //---------- 1st attempt at rendering fields based on status ----------//
 
 
@@ -88,26 +125,10 @@ return (
         </select>
       </td>
       <td>
-        <select
-          className="form-select"
-          id="rating"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-        >
-          <option value="--">--</option> 
-          <option value="1">1 - Low</option>
-          <option value="2">2 - Below Average</option>
-          <option value="3">3 - Average</option>
-          <option value="4">4 - Above Average</option>
-          <option value="5">5 - High</option>
-        </select>
+        {renderRatingInput()}
       </td>
       <td>
-      <input
-        type="text"
-        value={playTime}
-        onChange={(e) => setPlayTime(e.target.value)}
-      />
+        {renderHoursPlayedInput()}
       </td>
       <td>
         {renderStartDateInput()}
