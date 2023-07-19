@@ -42,7 +42,7 @@ const NavBar = () => {
                   <NavLink
                     to={`/profiles/${user.username}`}
                     className="nav-link"
-                    activeClassName="active"
+                    
                   >
                     My Profile
                   </NavLink>
@@ -51,7 +51,7 @@ const NavBar = () => {
                   <NavLink
                     to="/games"
                     className="nav-link"
-                    activeClassName="active"
+                    
                   >
                     Browse Games
                   </NavLink>
@@ -60,7 +60,7 @@ const NavBar = () => {
                   <NavLink
                     to="/my_games"
                     className="nav-link"
-                    activeClassName="active"
+                    
                   >
                     My Games
                   </NavLink>
@@ -77,7 +77,7 @@ const NavBar = () => {
                   <NavLink
                     to="/"
                     className="nav-link"
-                    activeClassName="active"
+                    
                   >
                     Home
                   </NavLink>
@@ -86,7 +86,7 @@ const NavBar = () => {
                   <NavLink
                     to="/login"
                     className="nav-link"
-                    activeClassName="active"
+                   
                   >
                     Login
                   </NavLink>
@@ -95,7 +95,7 @@ const NavBar = () => {
                   <NavLink
                     to="/signup"
                     className="nav-link"
-                    activeClassName="active"
+                    
                   >
                     Signup
                   </NavLink>
