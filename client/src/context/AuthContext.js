@@ -94,17 +94,6 @@ const UserProvider = ({ children }) => {
 
       };
 
-      const addProfile = (newProfile) => {
-        fetch('/profiles', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newProfile)
-        })
-            .then(response => response.json())
-            .then(data => {
-                
-                setUser({ ...user, profile: data })}) // Update only the profile property
-        }
 
     const addGameLog = (newGameLog) => {
         fetch('/game_logs', {
@@ -141,7 +130,6 @@ const UserProvider = ({ children }) => {
             login,
             logout,
             editProfile,
-            addProfile,
             allGames,
             deleteAccount,
             addGameLog,

@@ -4,14 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import '../Styles/EditProfile.css';
 
 const EditProfile = ({ setEditing }) => {
-  const { user, editProfile, genres } = useContext(UserContext);
+  const { user, genres, profile, setUser } = useContext(UserContext);
   const [name, setName] = useState(user.profile?.name || '');
   const [age, setAge] = useState(user.profile?.age || '');
   const [avatar, setAvatar] = useState(user.profile?.avatar || '');
   const [bio, setBio] = useState(user.profile?.bio || '');
-  const [totalGamesPlayed, setTotalGamesPlayed] = useState(user.profile?.total_games_played || 0);
   const [favoriteGenre, setFavoriteGenre] = useState(user.profile?.favorite_genre || '');
-  const [hoursPlayed, setHoursPlayed] = useState(user.profile?.hours_played || 0);
+  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -29,10 +28,27 @@ const EditProfile = ({ setEditing }) => {
 
     };
 
-    editProfile(updatedProfile);
-    setEditing(false);
+    
+      fetch(`/profiles/${user.profile.id}`, {
+        method: 'PATCH',  
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedProfile),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.errors) {
+            const errorList = data.errors.map((error) => <li key={error}>{error}</li>);
+            setErrors(errorList);
+            console.log(errorList);
+          } else {
+            setUser({ ...user, profile: data });
+            setEditing(false);
+          }
+        });
+      }
 
-  };
 
   //
   const genresList = genres && Object.values(genres).flat().map((genre) => genre.name);
@@ -75,6 +91,11 @@ const EditProfile = ({ setEditing }) => {
         <br />
         <button type="button" onClick={() => setEditing(false)}>Cancel</button>
       </form>
+      <div>
+        <ul className="errors-list">
+          {errors}
+        </ul>
+      </div>
     </div>
   );
 };

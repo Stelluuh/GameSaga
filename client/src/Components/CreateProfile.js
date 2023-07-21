@@ -5,7 +5,7 @@ import '../Styles/CreateProfile.css'
 
 
 const CreateProfile = () => {
-    const { addProfile, genres, user, isLoggedIn } = useContext(UserContext)
+    const { genres, user, isLoggedIn, setUser } = useContext(UserContext)
     
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
@@ -14,12 +14,27 @@ const CreateProfile = () => {
     const [totalGamesPlayed, setTotalGamesPlayed] = useState(0)
     const [favoriteGenre, setFavoriteGenre] = useState('')
     const [hoursPlayed, setHoursPlayed] = useState(0)
+    const [errors, setErrors] = useState([])
 
     const navigate = useNavigate()
 
+    const addProfile = (newProfile) => {
+        fetch('/profiles', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newProfile)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {
+                    setErrors(data.errors)
+                    console.log(data.errors)
+                } else
+                setUser({ ...user, profile: data })}) // Update only the profile property
+        }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('Profile Created')
         const newProfile = {
             name: name,
             age: age,
@@ -28,13 +43,31 @@ const CreateProfile = () => {
             total_games_played: totalGamesPlayed,
             favorite_genre: favoriteGenre,
             hours_played: hoursPlayed,
-        }
-        addProfile(newProfile)
-        navigate(`/profiles/${user.username}`)
+        } 
+
+        fetch('/profiles', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newProfile),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.errors) {
+                    const errorList = data.errors.map((error) => <li key={error}>{error}</li>)
+                    setErrors(errorList)
+                    console.log(errorList)
+                } else {
+                    setUser({ ...user, profile: data })
+                    navigate(`/profiles/${user.username}`)
+                }
+            })
+
     }
 
     
-    if (!isLoggedIn) {
+    if (!isLoggedIn ) {
         return <h3>Please login to view your profile.</h3>
     } else {
 
@@ -51,8 +84,6 @@ const CreateProfile = () => {
             <input type="text" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
             <label> Bio: </label>
             <input type="text" value={bio} onChange={(e) => setBio(e.target.value)} />
-            {/* <label> Total Games Played: </label> */}
-            {/* <input type="number" value={totalGamesPlayed} onChange={(e) => setTotalGamesPlayed(e.target.value)} /> */}
             <label> Favorite Genre: </label>
             <select value={favoriteGenre} onChange={(e) => setFavoriteGenre(e.target.value)}>
                 <option value="N/A">Select Genre</option>
@@ -62,12 +93,15 @@ const CreateProfile = () => {
                     </option>
                  ))}
           </select>
-            {/* <label> Hours Played: </label> */}
-            {/* <input type="number" value={hoursPlayed} onChange={(e) => setHoursPlayed(e.target.value)} /> */}
             <br />
-            <button type="submit">Submit</button>
+            <button type="submit">Create Profile</button>
         </form>
-      
+        <div>
+            <ul className="errors-list">
+                {errors}
+            </ul>
+        </div>
+    
     </div>
   )
 }
