@@ -75,3 +75,11 @@
     
   }
   
+  .errors-list {
+    margin-top: 10px;
+    padding: 0;
+    color: #ff0000;
+    list-style: none;
+    /* q: how to do I center this? */
+    text-align: center;
+  }
