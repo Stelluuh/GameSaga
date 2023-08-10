@@ -50,7 +50,7 @@ To get started with the Game Tracker App, follow these steps:
     - npm start --prefix client
 3. to start the server-side, backend run:
     - bundle install
-    - rails db:migrate db:seed
+    - rails db:drop db:create db:migrate db:seed
 
 
 ### Contributions and Feedback
