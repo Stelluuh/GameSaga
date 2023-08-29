@@ -51,6 +51,7 @@ To get started with the Game Tracker App, follow these steps:
 3. to start the server-side, backend run:
     - bundle install
     - rails db:drop db:create db:migrate db:seed
+    - rails s
 
 
 ### Contributions and Feedback
