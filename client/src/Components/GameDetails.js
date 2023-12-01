@@ -63,7 +63,7 @@ const GameDetails = () => {
         
         <h3>{game.name}</h3>
         <div className="col-md-8">
-          {screenshots.length > 0 && ( // if there are screenshots, render the carousel
+          {screenshots.length > 0 && ( // if there are screenshots, render the carousel code copied from bootsrap:
             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                 {screenshots.map((screenshot, index) => (
